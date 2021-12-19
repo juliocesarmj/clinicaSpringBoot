@@ -1,7 +1,5 @@
 package com.br.juliomoraes.clinicameriti.services;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.br.juliomoraes.clinicameriti.dto.EspecialidadeDTO;
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.model.Especialidade;
 import com.br.juliomoraes.clinicameriti.model.Medico;
@@ -75,19 +72,15 @@ public class MedicoService implements IMedicoService {
 
 		try {
 			final List<Medico> list = this.repository.medicosPorEspecialidadeId(idEspecialidade);
-			final List<MedicoDTO> listDto = new ArrayList<>();
-			for (final Medico medicoDTO : list) {
-				final MedicoDTO dto = new MedicoDTO();
-				dto.setId(medicoDTO.getId());
-				dto.setNome(medicoDTO.getNome());
-				dto.setCrm(medicoDTO.getCrm());
-				dto.setDataNascimento(DataUtils.dataToStringPtBr(medicoDTO.getDataNascimento()));
-				dto.setEspecialidade(new EspecialidadeDTO(medicoDTO.getEspecialidade()));
-				listDto.add(dto);
+			if (!list.isEmpty()) {
+				return list.stream().map(MedicoDTO::new).collect(Collectors.toList());
 			}
-			return listDto;
+			throw new ObjectNotFoundException(HttpStatus.NOT_FOUND, "Não há médicos para a especialidade informada");
+		} catch (final ObjectNotFoundException o) {
+			throw o;
 		} catch (final Exception e) {
-			return Collections.emptyList();
+			throw new StandardException(HttpStatus.INTERNAL_SERVER_ERROR,
+					"Erro interno. Contate o suporte." + e.getMessage());
 		}
 	}
 
@@ -96,19 +89,23 @@ public class MedicoService implements IMedicoService {
 
 		try {
 			final Medico medico = this.pesquisarMedico(idMedico);
-			this.validaExisteMedicoCRM(dto.getCrm());
+			if (dto.getCrm().equalsIgnoreCase(medico.getCrm())) {
+
+				medico.setCrm(dto.getCrm());
+			} else {
+				this.validaExisteMedicoCRM(dto.getCrm());
+			}
 
 			medico.setNome(dto.getNome());
-			medico.setCrm(dto.getCrm());
 
 			this.validaDataStringESetaDataNascimento(dto.getDataNascimento(), medico);
+			this.repository.save(medico);
 
 		} catch (final ObjectNotFoundException e) {
 			throw e;
 		} catch (final Exception e) {
 			throw e;
 		}
-
 	}
 
 	@Override
@@ -132,7 +129,6 @@ public class MedicoService implements IMedicoService {
 		try {
 
 			final Medico medico = this.pesquisarMedico(idMedico);
-
 			return new MedicoDTO(medico);
 
 		} catch (final ObjectNotFoundException e) {
@@ -155,7 +151,8 @@ public class MedicoService implements IMedicoService {
 		} catch (final ObjectNotFoundException e) {
 			throw e;
 		} catch (final Exception e) {
-			throw new StandardException(HttpStatus.BAD_REQUEST, "Erro interno. Contate o suporte." + e.getMessage());
+			throw new StandardException(HttpStatus.INTERNAL_SERVER_ERROR,
+					"Erro interno. Contate o suporte." + e.getMessage());
 		}
 	}
 
@@ -178,7 +175,8 @@ public class MedicoService implements IMedicoService {
 		} catch (final MedicoExistsException m) {
 			throw m;
 		} catch (final Exception e) {
-			throw new StandardException(HttpStatus.BAD_REQUEST, "Erro interno. Contate o suporte." + e.getMessage());
+			throw new StandardException(HttpStatus.INTERNAL_SERVER_ERROR,
+					"Erro interno. Contate o suporte." + e.getMessage());
 		}
 	}
 

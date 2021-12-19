@@ -23,13 +23,13 @@ public class MedicoDTO {
 		this.nome = entidade.getNome();
 		this.crm = entidade.getCrm();
 		this.dataNascimento = DataUtils.dataToStringPtBr(entidade.getDataNascimento());
-		this.novo(entidade.getEspecialidade());
+		this.especialidade = this.novo(entidade.getEspecialidade());
 	}
 
 	public EspecialidadeDTO novo(final Especialidade entidade) {
 		final EspecialidadeDTO dto = new EspecialidadeDTO();
 		dto.setId(entidade.getId());
-		dto.setEspecialidade(dto.getEspecialidade());
+		dto.setEspecialidade(entidade.getEspecialidade());
 		return dto;
 	}
 
