@@ -13,4 +13,7 @@ public interface IMedicoRepository extends JpaRepository<Medico, Long> {
 	@Query("FROM Medico med INNER JOIN med.especialidade esp where esp.id =:idEspecialidade")
 	List<Medico> medicosPorEspecialidadeId(@Param("idEspecialidade") final Long idEspecialidade);
 
+	@Query("FROM Medico med where med.crm = :crm")
+	Medico medicoPorCrm(@Param("crm") String crm);
+
 }
