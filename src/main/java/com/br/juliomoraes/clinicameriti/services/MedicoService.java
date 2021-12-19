@@ -90,7 +90,6 @@ public class MedicoService implements IMedicoService {
 		try {
 			final Medico medico = this.pesquisarMedico(idMedico);
 			if (dto.getCrm().equalsIgnoreCase(medico.getCrm())) {
-
 				medico.setCrm(dto.getCrm());
 			} else {
 				this.validaExisteMedicoCRM(dto.getCrm());
@@ -128,7 +127,6 @@ public class MedicoService implements IMedicoService {
 	public MedicoDTO consultarMedico(final Long idMedico) {
 
 		try {
-
 			final Medico medico = this.pesquisarMedico(idMedico);
 			return new MedicoDTO(medico);
 
@@ -143,7 +141,6 @@ public class MedicoService implements IMedicoService {
 	private Medico pesquisarMedico(final Long idMedico) {
 
 		try {
-
 			final Optional<Medico> result = this.repository.findById(idMedico);
 
 			return result
@@ -168,7 +165,6 @@ public class MedicoService implements IMedicoService {
 	private void validaExisteMedicoCRM(final String crm) {
 
 		try {
-
 			final Medico result = this.repository.medicoPorCrm(crm);
 			if (result != null && result.getCrm().equalsIgnoreCase(crm)) {
 				throw new MedicoExistsException(HttpStatus.BAD_REQUEST, "O crm informado já existe.");
