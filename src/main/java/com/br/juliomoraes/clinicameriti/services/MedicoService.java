@@ -94,6 +94,7 @@ public class MedicoService implements IMedicoService {
 				medico.setCrm(dto.getCrm());
 			} else {
 				this.validaExisteMedicoCRM(dto.getCrm());
+				medico.setCrm(dto.getCrm());
 			}
 
 			medico.setNome(dto.getNome());
