@@ -97,6 +97,22 @@ public class Consulta implements Serializable {
 		this.registroConsulta = registroConsulta;
 	}
 
+	public Especialidade getEspecialidade() {
+		return this.especialidade;
+	}
+
+	public void setEspecialidade(final Especialidade especialidade) {
+		this.especialidade = especialidade;
+	}
+
+	public Medico getMedico() {
+		return this.medico;
+	}
+
+	public void setMedico(final Medico medico) {
+		this.medico = medico;
+	}
+
 	public TipoStatusConsulta getStatusConsulta() {
 		return this.statusConsulta;
 	}
@@ -127,14 +143,6 @@ public class Consulta implements Serializable {
 
 	public void setValorConsulta(final Double valorConsulta) {
 		this.valorConsulta = valorConsulta;
-	}
-
-	public Especialidade getEspecialidade() {
-		return this.especialidade;
-	}
-
-	public Medico getMedico() {
-		return this.medico;
 	}
 
 	@Override
