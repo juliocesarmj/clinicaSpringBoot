@@ -1,12 +1,15 @@
 package com.br.juliomoraes.clinicameriti.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,6 +42,9 @@ public class Endereco implements Serializable {
 	@Column(nullable = false, unique = false, length = 8)
 	private String cep;
 
+	@OneToMany(mappedBy = "endereco")
+	private List<Paciente> pacientes = new ArrayList<>();
+
 	public Endereco() {
 	}
 
@@ -53,6 +59,21 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
+	}
+
+	public Endereco(final Long id, final String ruaOuAvenida, final int numero, final String complemento,
+			final String bairro, final String cidade, final String estado, final String cep,
+			final List<Paciente> pacientes) {
+		super();
+		this.id = id;
+		this.ruaOuAvenida = ruaOuAvenida;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.cep = cep;
+		this.pacientes = pacientes;
 	}
 
 	public Long getId() {
@@ -117,5 +138,9 @@ public class Endereco implements Serializable {
 
 	public void setCep(final String cep) {
 		this.cep = cep;
+	}
+
+	public List<Paciente> getPacientes() {
+		return this.pacientes;
 	}
 }

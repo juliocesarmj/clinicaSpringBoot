@@ -55,6 +55,8 @@ public class Consulta implements Serializable {
 	@Column(nullable = false)
 	private Double valorConsulta;
 
+	private String observacoesMedico;
+
 	public Consulta() {
 	}
 
@@ -71,6 +73,23 @@ public class Consulta implements Serializable {
 		this.statusPagamento = statusPagamento;
 		this.dataAgendamento = dataAgendamento;
 		this.valorConsulta = valorConsulta;
+	}
+
+	public Consulta(final Long id, final Paciente paciente, final Date registroConsulta,
+			final Especialidade especialidade, final Medico medico, final TipoStatusConsulta statusConsulta,
+			final TipoStatusPagamento statusPagamento, final Date dataAgendamento, final Double valorConsulta,
+			final String observacoesMedico) {
+		super();
+		this.id = id;
+		this.paciente = paciente;
+		this.registroConsulta = registroConsulta;
+		this.especialidade = especialidade;
+		this.medico = medico;
+		this.statusConsulta = statusConsulta;
+		this.statusPagamento = statusPagamento;
+		this.dataAgendamento = dataAgendamento;
+		this.valorConsulta = valorConsulta;
+		this.observacoesMedico = observacoesMedico;
 	}
 
 	public Long getId() {
@@ -143,6 +162,14 @@ public class Consulta implements Serializable {
 
 	public void setValorConsulta(final Double valorConsulta) {
 		this.valorConsulta = valorConsulta;
+	}
+
+	public String getObservacoesMedico() {
+		return this.observacoesMedico;
+	}
+
+	public void setObservacoesMedico(final String observacoesMedico) {
+		this.observacoesMedico = observacoesMedico;
 	}
 
 	@Override
