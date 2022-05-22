@@ -1,19 +1,20 @@
 package com.br.juliomoraes.clinicameriti.utils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public abstract class DataUtils {
 
-	public static String dataToString(final Date data) {
+	public static String dataToString(final LocalDate data) {
 
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(data);
 	}
 
-	public static String dataToStringPtBr(final Date data) {
+	public static String dataToStringPtBr(final LocalDate data) {
 
 		final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		return sdf.format(data);

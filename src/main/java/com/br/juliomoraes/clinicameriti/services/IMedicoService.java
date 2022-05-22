@@ -3,6 +3,7 @@ package com.br.juliomoraes.clinicameriti.services;
 import java.util.List;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
 
 public interface IMedicoService {
 
@@ -16,5 +17,5 @@ public interface IMedicoService {
 
 	List<MedicoDTO> medicos();
 
-	List<MedicoDTO> medicosPorEspecialidade(final Long idEspecialidade);
+	List<MedicoDTO> medicosPorEspecialidade(final Especialidade especialidade);
 }

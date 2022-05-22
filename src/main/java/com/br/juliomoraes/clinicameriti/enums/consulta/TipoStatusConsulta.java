@@ -9,6 +9,6 @@ public enum TipoStatusConsulta {
 
 	AGENDADA("agendada"), REAGENDADA("reagendada"), CANCELADA("cancelada"), CONCLUIDA("concluída");
 
-	private String valor;
+	private final String valor;
 
 }

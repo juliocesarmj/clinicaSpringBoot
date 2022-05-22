@@ -1,19 +1,13 @@
 package com.br.juliomoraes.clinicameriti.repository;
 
-import java.util.List;
-
+import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
+import com.br.juliomoraes.clinicameriti.model.medico.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import com.br.juliomoraes.clinicameriti.model.Medico;
+import java.util.List;
 
 public interface IMedicoRepository extends JpaRepository<Medico, Long> {
 
-	@Query("FROM Medico med INNER JOIN med.especialidade esp where esp.id =:idEspecialidade")
-	List<Medico> medicosPorEspecialidadeId(@Param("idEspecialidade") final Long idEspecialidade);
-
-	@Query("FROM Medico med where med.crm = :crm")
-	Medico medicoPorCrm(@Param("crm") String crm);
-
+	List<Medico> findByEspecialidade(final Especialidade especialidade);
+	Medico findByCrm(String crm);
 }

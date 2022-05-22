@@ -6,16 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.br.juliomoraes.clinicameriti.model.Consulta;
+import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
 
 public interface IConsultaRepository extends JpaRepository<Consulta, Long> {
 
-	@Query("FROM Consulta consulta JOIN consulta.paciente" + " JOIN consulta.medico where consulta.medico.crm = :crm")
-	List<Consulta> consultasPorCrmMedico(@Param("crm") final String crmMedico);
+	List<Consulta> findByMedicoId(final Long medicoId);
 
-	@Query("FROM Consulta consulta JOIN consulta.paciente"
-			+ " JOIN consulta.medico where consulta.medico.nome = :nomeMedico")
-	List<Consulta> consultasPorNomeMedico(@Param("nomeMedico") final String nomeMedico);
+	List<Consulta> findByMedicoNome(final String medicoNome);
 
 	@Query("FROM Consulta consulta JOIN consulta.paciente JOIN consulta.medico where consulta.paciente.nome = :nomePaciente")
 	List<Consulta> consultasPorNomePaciente(@Param("nomePaciente") String nomePaciente);
