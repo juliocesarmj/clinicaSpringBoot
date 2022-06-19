@@ -1,5 +1,6 @@
 package com.br.juliomoraes.clinicameriti.model.paciente;
 
+import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
 import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Paciente {
 
 	@Id
@@ -27,7 +27,7 @@ public class Paciente {
 	@Column(unique = true, length = 50)
 	private String email;
 
-	@Column(nullable = false, unique = true, length = 11)
+	@Column(nullable = false, unique = true, length = 20)
 	private String telefone;
 
 	@Column(nullable = false, unique = false, length = 12)
@@ -36,7 +36,17 @@ public class Paciente {
 	@Column(nullable = false, unique = true, length = 11)
 	private String cpf;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
+
+	public static Paciente novo(PacienteDTO dto) {
+		Paciente paciente = new Paciente();
+		paciente.setNome(dto.getNome());
+		paciente.setCpf(dto.getCpf());
+		paciente.setEmail(dto.getEmail());
+		paciente.setDataNascimento(dto.getDataNascimento());
+		paciente.setTelefone(dto.getTelefone());
+		return paciente;
+	}
 }

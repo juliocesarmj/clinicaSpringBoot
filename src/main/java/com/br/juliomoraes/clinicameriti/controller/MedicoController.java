@@ -50,5 +50,4 @@ public class MedicoController {
 	public ResponseEntity<MedicoDTO> consultarMedico(@PathVariable final Long idMedico) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.service.consultarMedico(idMedico));
 	}
-
 }

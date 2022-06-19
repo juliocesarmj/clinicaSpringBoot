@@ -1,31 +1,20 @@
 package com.br.juliomoraes.clinicameriti.model.consulta;
 
-import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.br.juliomoraes.clinicameriti.dto.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
 import com.br.juliomoraes.clinicameriti.model.medico.Medico;
 import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "consulta")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Consulta {
@@ -35,13 +24,11 @@ public class Consulta {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
 
-	private LocalDate registroConsulta;
+	private LocalDate dataRegistroConsulta;
 
 	@ManyToOne
-	@JoinColumn(name = "id_medico")
 	private Medico medico;
 
 	@Enumerated(EnumType.STRING)
@@ -49,11 +36,23 @@ public class Consulta {
 	private TipoStatusConsulta statusConsulta;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, columnDefinition = "Aguardando pagamento")
+	@Column(nullable = false)
 	private TipoStatusPagamento statusPagamento;
 
 	@Column(nullable = false)
 	private LocalDate dataAgendamento;
 
+	@Column(columnDefinition = "TEXT")
 	private String observacoesMedico;
+
+	public static Consulta novo(ConsultaDTO dto) {
+		Consulta consulta = new Consulta();
+		consulta.setDataRegistroConsulta(LocalDate.now());
+		consulta.setDataAgendamento(dto.getDataAgendamento());
+		consulta.setStatusConsulta(dto.getStatusConsulta());
+		consulta.setStatusPagamento(dto.getStatusPagamento());
+		consulta.setObservacoesMedico(dto.getObservacoesMedico());
+
+		return consulta;
+	}
 }

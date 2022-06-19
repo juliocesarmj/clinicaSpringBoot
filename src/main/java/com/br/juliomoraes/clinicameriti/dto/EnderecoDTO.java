@@ -1,9 +1,12 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
+import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -11,13 +14,26 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EnderecoDTO {
 
-	private Long id;
 	private String ruaOuAvenida;
 	private int numero;
 	private String complemento;
 	private String bairro;
 	private String cidade;
 	private String estado;
+
+	@Size(min = 8, max = 8 ,message = "CEP inválido")
 	private String cep;
-	private PacienteDTO pacienteDTO;
+	private Long pacienteId;
+
+	public static EnderecoDTO copyEntityFromDto(Endereco endereco) {
+		return EnderecoDTO.builder()
+				.ruaOuAvenida(endereco.getRuaOuAvenida())
+				.cep(endereco.getCep())
+				.bairro(endereco.getBairro())
+				.complemento(endereco.getComplemento())
+				.cidade(endereco.getCidade())
+				.estado(endereco.getEstado())
+				.numero(endereco.getNumero())
+				.build();
+	}
 }
