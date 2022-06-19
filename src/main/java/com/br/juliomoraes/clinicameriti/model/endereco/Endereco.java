@@ -2,16 +2,16 @@ package com.br.juliomoraes.clinicameriti.model.endereco;
 
 import com.br.juliomoraes.clinicameriti.dto.EnderecoDTO;
 import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "endereco")
@@ -46,9 +46,10 @@ public class Endereco implements Serializable {
 	@Column(nullable = false, length = 8)
 	private String cep;
 
-	@Column(nullable = false)
-	@OneToMany(mappedBy = "endereco")
-	private List<Paciente> pacientes = new ArrayList<>();
+	@OneToOne
+	@JoinColumn(name = "paciente_id", unique = true)
+	@JsonIgnore
+	private Paciente paciente;
 
 	public static Endereco novo(EnderecoDTO dto) {
 		Endereco endereco = new Endereco();

@@ -2,6 +2,8 @@ package com.br.juliomoraes.clinicameriti.model.paciente;
 
 import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
 import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,8 +38,7 @@ public class Paciente {
 	@Column(nullable = false, unique = true, length = 11)
 	private String cpf;
 
-	@ManyToOne
-	@JoinColumn(name = "endereco_id")
+	@OneToOne(mappedBy = "paciente")
 	private Endereco endereco;
 
 	public static Paciente novo(PacienteDTO dto) {

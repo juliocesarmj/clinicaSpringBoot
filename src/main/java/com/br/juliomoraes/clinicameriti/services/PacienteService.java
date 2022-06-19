@@ -8,7 +8,11 @@ import com.br.juliomoraes.clinicameriti.repository.IEnderecoRepository;
 import com.br.juliomoraes.clinicameriti.repository.IPacienteRepository;
 import com.br.juliomoraes.clinicameriti.services.exceptions.StandardException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PacienteService {
@@ -26,10 +30,12 @@ public class PacienteService {
         this.validaTelefone(dto.getTelefone());
 
         Paciente paciente = Paciente.novo(dto);
-        this.pacienteRepository.save(paciente);
         Endereco endereco = Endereco.novo(dto.getEnderecoDTO());
-        endereco.getPacientes().add(paciente);
+
+        this.pacienteRepository.save(paciente);
+        endereco.setPaciente(paciente);
         this.enderecoRepository.save(endereco);
+
     }
 
     private void validaCpf(String cpf) {
@@ -43,4 +49,7 @@ public class PacienteService {
         if(this.pacienteRepository.findByTelefone(telefone) != null) throw new StandardException(MessageException.TELEFONE_EXISTENTE.getMensagem());
     }
 
+    public Page<Paciente> pacientes(Pageable pageable) {
+        return this.pacienteRepository.findAll(pageable);
+    }
 }
