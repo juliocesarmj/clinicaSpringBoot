@@ -37,22 +37,19 @@ public class PacienteService {
         this.enderecoRepository.save(endereco);
 
     }
+
     public Page<PacienteDTO> pacientes(Pageable pageable) {
         return this.pacienteRepository.findAll(pageable).map(PacienteDTO::new);
     }
 
     public PacienteDTO pacientePorId(Long id) {
-
         Optional<Paciente> result = this.pacienteRepository.findById(id);
-
-        if (result.isPresent()) {
-            return new PacienteDTO(result.get());
-        }
-        throw new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem());
+        return new PacienteDTO(result
+                .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
     }
 
     public PacienteDTO pacientePorCpf(String cpf) {
-        if(cpf != null && cpf.length() == 11) {
+        if (cpf != null && cpf.length() == 11) {
             Paciente result = this.pacienteRepository
                     .findByCpfOptional(cpf)
                     .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem()));
@@ -60,15 +57,20 @@ public class PacienteService {
         }
         throw new StandardException(MessageException.CPF_INVALIDO.getMensagem());
     }
+
     private void validaCpf(String cpf) {
-       if(this.pacienteRepository.findByCpf(cpf) != null) throw new StandardException(MessageException.CPF_EXISTENTE.getMensagem());
+        if (this.pacienteRepository.findByCpf(cpf) != null)
+            throw new StandardException(MessageException.CPF_EXISTENTE.getMensagem());
     }
+
     private void validaEmail(String email) {
-        if(this.pacienteRepository.findByEmail(email) != null) throw new StandardException(MessageException.EMAIL_EXISTENTE.getMensagem());
+        if (this.pacienteRepository.findByEmail(email) != null)
+            throw new StandardException(MessageException.EMAIL_EXISTENTE.getMensagem());
     }
 
     private void validaTelefone(String telefone) {
-        if(this.pacienteRepository.findByTelefone(telefone) != null) throw new StandardException(MessageException.TELEFONE_EXISTENTE.getMensagem());
+        if (this.pacienteRepository.findByTelefone(telefone) != null)
+            throw new StandardException(MessageException.TELEFONE_EXISTENTE.getMensagem());
     }
 
 
