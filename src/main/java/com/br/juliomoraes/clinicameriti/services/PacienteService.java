@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacienteService {
@@ -37,7 +37,29 @@ public class PacienteService {
         this.enderecoRepository.save(endereco);
 
     }
+    public Page<PacienteDTO> pacientes(Pageable pageable) {
+        return this.pacienteRepository.findAll(pageable).map(PacienteDTO::new);
+    }
 
+    public PacienteDTO pacientePorId(Long id) {
+
+        Optional<Paciente> result = this.pacienteRepository.findById(id);
+
+        if (result.isPresent()) {
+            return new PacienteDTO(result.get());
+        }
+        throw new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem());
+    }
+
+    public PacienteDTO pacientePorCpf(String cpf) {
+        if(cpf != null && cpf.length() == 11) {
+            Paciente result = this.pacienteRepository
+                    .findByCpfOptional(cpf)
+                    .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem()));
+            return new PacienteDTO(result);
+        }
+        throw new StandardException(MessageException.CPF_INVALIDO.getMensagem());
+    }
     private void validaCpf(String cpf) {
        if(this.pacienteRepository.findByCpf(cpf) != null) throw new StandardException(MessageException.CPF_EXISTENTE.getMensagem());
     }
@@ -49,7 +71,5 @@ public class PacienteService {
         if(this.pacienteRepository.findByTelefone(telefone) != null) throw new StandardException(MessageException.TELEFONE_EXISTENTE.getMensagem());
     }
 
-    public Page<Paciente> pacientes(Pageable pageable) {
-        return this.pacienteRepository.findAll(pageable);
-    }
+
 }

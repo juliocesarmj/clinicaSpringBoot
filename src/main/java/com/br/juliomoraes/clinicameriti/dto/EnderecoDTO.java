@@ -23,7 +23,6 @@ public class EnderecoDTO {
 
 	@Size(min = 8, max = 8 ,message = "CEP inválido")
 	private String cep;
-	private Long pacienteId;
 
 	public static EnderecoDTO copyEntityFromDto(Endereco endereco) {
 		return EnderecoDTO.builder()

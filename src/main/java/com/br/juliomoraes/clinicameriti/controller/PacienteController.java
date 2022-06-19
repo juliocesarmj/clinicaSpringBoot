@@ -31,8 +31,17 @@ public class PacienteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Paciente>> pacientes(Pageable pageable) {
+    public ResponseEntity<Page<PacienteDTO>> pacientes(Pageable pageable) {
         return ResponseEntity.ok().body(this.service.pacientes(pageable));
     }
 
+    @GetMapping("/{idPaciente}")
+    public ResponseEntity<PacienteDTO> pacientePorId(@PathVariable Long idPaciente) {
+        return ResponseEntity.ok().body(this.service.pacientePorId(idPaciente));
+    }
+
+    @GetMapping("/pacienteporcpf/{cpf}")
+    public ResponseEntity<PacienteDTO> pacientePorCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok().body(this.service.pacientePorCpf(cpf));
+    }
 }

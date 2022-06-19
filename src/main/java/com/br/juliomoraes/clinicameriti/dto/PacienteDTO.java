@@ -1,19 +1,17 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import lombok.AllArgsConstructor;
+import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @SuperBuilder
 public class PacienteDTO {
 
@@ -30,4 +28,14 @@ public class PacienteDTO {
 	@Size(min = 11, max = 11 ,message = "Cpf inválido")
 	private String cpf;
 	private EnderecoDTO enderecoDTO;
+
+	public PacienteDTO(Paciente paciente) {
+		id = paciente.getId();
+		nome = paciente.getNome();
+		email = paciente.getEmail();
+		telefone = paciente.getTelefone();
+		dataNascimento = paciente.getDataNascimento();
+		cpf = paciente.getCpf();
+		enderecoDTO = EnderecoDTO.copyEntityFromDto(paciente.getEndereco());
+	}
 }

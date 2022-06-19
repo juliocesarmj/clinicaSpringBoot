@@ -5,7 +5,9 @@ public enum MessageException {
     MEDICO_EXISTE_CRM("Já existe um médico no sistema com o CRM informado."), ESPECIALIDADE_NAO_EXISTE("A especialidade informada não existe."),
     CPF_EXISTENTE("O cpf informado já existe."),
     EMAIL_EXISTENTE("O email informado já existe"),
-    TELEFONE_EXISTENTE("O telefone informado já existe");
+    TELEFONE_EXISTENTE("O telefone informado já existe"),
+
+    CPF_INVALIDO("Informe um CPF válido.");
 
     private final String mensagem;
 
