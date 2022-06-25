@@ -72,6 +72,4 @@ public class PacienteService {
         if (this.pacienteRepository.findByTelefone(telefone) != null)
             throw new StandardException(MessageException.TELEFONE_EXISTENTE.getMensagem());
     }
-
-
 }

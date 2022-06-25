@@ -7,7 +7,9 @@ public enum MessageException {
     EMAIL_EXISTENTE("O email informado já existe"),
     TELEFONE_EXISTENTE("O telefone informado já existe"),
 
-    CPF_INVALIDO("Informe um CPF válido.");
+    CPF_INVALIDO("Informe um CPF válido."),
+    MEDICO_NAO_EXISTE("Médico não encontrado"),
+    PACIENTE_NAO_EXISTE("Paciente não encontrado");
 
     private final String mensagem;
 

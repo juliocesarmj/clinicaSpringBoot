@@ -8,6 +8,7 @@ import com.br.juliomoraes.clinicameriti.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<Void> novo(@RequestBody @Valid PacienteDTO dto) {
         this.service.novo(dto);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
     @GetMapping

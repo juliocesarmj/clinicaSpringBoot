@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class ConsultaDTO {
 
     private Long id;
-    private PacienteDTO pacienteDTO;
+    private Long pacienteId;
     private LocalDate dataRegistroConsulta;
     private Long medicoId;
     private TipoStatusConsulta statusConsulta;

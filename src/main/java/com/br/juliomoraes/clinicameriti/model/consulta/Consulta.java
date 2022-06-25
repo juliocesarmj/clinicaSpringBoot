@@ -45,14 +45,15 @@ public class Consulta {
 	@Column(columnDefinition = "TEXT")
 	private String observacoesMedico;
 
-	public static Consulta novo(ConsultaDTO dto) {
+	public static Consulta novo(ConsultaDTO dto, Paciente paciente, Medico medico) {
 		Consulta consulta = new Consulta();
 		consulta.setDataRegistroConsulta(LocalDate.now());
 		consulta.setDataAgendamento(dto.getDataAgendamento());
 		consulta.setStatusConsulta(dto.getStatusConsulta());
 		consulta.setStatusPagamento(dto.getStatusPagamento());
 		consulta.setObservacoesMedico(dto.getObservacoesMedico());
-
+		consulta.setPaciente(paciente);
+		consulta.setMedico(medico);
 		return consulta;
 	}
 }

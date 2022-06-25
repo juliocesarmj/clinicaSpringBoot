@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TipoStatusPagamento {
 
-	PAGO("Pago"), PAGAR_CAIXA("Pagamento no caixa"), AGUARDANDO_PAGAMENTO("Aguardando pagamento");
+	PAGAMENTO_PIX("Pagamento via pix"), PAGAR_CAIXA("Pagamento no caixa"), AGUARDANDO_PAGAMENTO("Aguardando pagamento");
 
 	private String valor;
 

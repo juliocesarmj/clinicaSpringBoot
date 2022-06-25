@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class MedicoController {
 	private IMedicoService service;
 
 	@PostMapping
-	public ResponseEntity<Void> novoMedico(@RequestBody final MedicoDTO dto) {
+	public ResponseEntity<Void> novoMedico(@RequestBody @Valid final MedicoDTO dto) {
 		this.service.novoMedico(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}

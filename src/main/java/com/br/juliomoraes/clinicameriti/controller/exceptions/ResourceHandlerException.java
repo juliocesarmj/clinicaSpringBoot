@@ -65,11 +65,11 @@ public class ResourceHandlerException {
 																		final HttpServletRequest req) {
 		final StandardError error = new StandardError();
 		error.setTimestamp(Instant.now());
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		error.setMessage(String.valueOf(MessageException.ESPECIALIDADE_NAO_EXISTE.getMensagem()));
+		error.setStatus(HttpStatus.BAD_REQUEST.value());
+		error.setMessage(e.getMessage());
 		error.setPath(req.getRequestURI());
 
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
