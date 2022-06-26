@@ -45,9 +45,9 @@ git clone https://github.com/juliocesarmj/clinicaSpringBoot
 
 ## POST
 http://localhost:8082/paciente
+OBS: Validações implementadas até o momento para evitar registros repetidos(cpf, telefone e email)
 
 Body ex: 
-
 {
     "nome": "paciente 1 teste",
     "email": "s33Sss@aa.com",
