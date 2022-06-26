@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +28,11 @@ public class MedicoService implements IMedicoService {
         this.validaExisteMedicoCRM(dto.getCrm());
         this.repository.save(MedicoMapper.copyDtoFromEntity(dto));
     }
-
     @Override
     @Transactional(readOnly = true)
     public List<MedicoDTO> medicos() {
         return this.repository.findAll().stream().map(MedicoDTO::new).collect(Collectors.toList());
     }
-
     @Override
     @Transactional(readOnly = true)
     public List<MedicoDTO> medicosPorEspecialidade(final Especialidade especialidade) {
@@ -49,21 +46,18 @@ public class MedicoService implements IMedicoService {
         throw new EspecialidadeException(MessageException.ESPECIALIDADE_NAO_EXISTE.getMensagem());
 
     }
-
     @Override
     public void alterarMedico(final Long idMedico, final MedicoDTO dto) {
         this.pesquisarMedico(idMedico);
         dto.setId(idMedico);
         this.repository.save(MedicoMapper.copyDtoFromEntity(dto));
     }
-
     @Override
     public void excluirMedico(final Long idMedico) {
         this.pesquisarMedico(idMedico);
         this.repository.deleteById(idMedico);
 
     }
-
     @Override
     @Transactional(readOnly = true)
     public MedicoDTO consultarMedico(final Long idMedico) {
@@ -71,17 +65,10 @@ public class MedicoService implements IMedicoService {
     }
 
     private Medico pesquisarMedico(final Long idMedico) {
-
-        final Optional<Medico> result = this.repository.findById(idMedico);
-
-        if (result.isPresent()) {
-            return result.get();
-        }
-        throw new ObjectNotFoundException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem());
+        return this.repository.findById(idMedico)
+                .orElseThrow(() -> new ObjectNotFoundException(MessageException.MEDICO_NAO_EXISTE.getMensagem()));
     }
-
     private void validaExisteMedicoCRM(final String crm) {
-
         final Medico result = this.repository.findByCrm(crm);
         if (Objects.nonNull(result)) {
             throw new MedicoExistsException(MessageException.MEDICO_EXISTE_CRM.getMensagem());

@@ -1,8 +1,6 @@
 package com.br.juliomoraes.clinicameriti.controller;
 
 import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
-import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
-import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
 import com.br.juliomoraes.clinicameriti.repository.IEnderecoRepository;
 import com.br.juliomoraes.clinicameriti.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/paciente")
