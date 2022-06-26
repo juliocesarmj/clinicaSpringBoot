@@ -119,6 +119,60 @@ Body ex:
     "valorConsulta": 150.00
 }
 
+# Consultas
+
+## POST (Agenda uma nova consulta)
+http://localhost:8082/consulta
+
+Body ex: 
+
+{
+    "pacienteId": 1,
+    "medicoId": 1,
+    "statusConsulta": "AGENDADA",
+    "statusPagamento": "AGUARDANDO_PAGAMENTO",
+    "dataAgendamento": "2022-06-30",
+    "observacoesMedico": "" (opcional)
+}
+
+## GET (Pesquisa uma consulta por id)
+http://localhost:8082/consulta/1
+
+Json retorno:
+
+{
+    "id": 1,
+    "dataRegistroConsulta": "2022-06-25",
+    "statusConsulta": "AGENDADA",
+    "statusPagamento": "AGUARDANDO_PAGAMENTO",
+    "dataAgendamento": "2022-06-30",
+    "pacienteDTO": {
+        "id": 1,
+        "nome": "paciente 1 teste",
+        "email": "s33Sss@aa.com",
+        "telefone": "21969323282",
+        "dataNascimento": "1990-09-17",
+        "cpf": "11511511519",
+        "enderecoDTO": {
+            "ruaOuAvenida": "rua murilo costa",
+            "numero": 10,
+            "complemento": "lote x quadra z",
+            "bairro": "jaspe",
+            "cidade": "nova york",
+            "estado": "florida",
+            "cep": "55225665"
+        }
+    },
+    "medicoDTO": {
+        "id": 1,
+        "nome": "Julio Cesar de Moraes",
+        "crm": "56562323",
+        "dataNascimento": "1990-09-17",
+        "especialidade": "CLINICO_GERAL",
+        "valorConsulta": 150.0
+    },
+    "observacoesMedico": ""
+}
 
 # Autor
 
