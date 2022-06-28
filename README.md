@@ -17,6 +17,12 @@ Caso o cpf nao exista no sistema, é solicitado alguns dados para cadastro e pos
 ### Médico - Pode informar indisponibilidade em sua agenda do dia, com isso, todos os pacientes agendados para esse dia, terão suas consultas modificadas para o status de cancelada, precisando ser reagendadas pelos atendentes. O medico poderá informar observaçoes em suas consultas durante o atendimento de um paciente X. Informações como remédios receitados, exames solicitados e etc. Ao fim de uma consulta, o mesmo poderá finalizar a consulta e a mesma terá o status de finalizada.
 ## Administrador - Permissão para criar/consultar/editar/remover cadastros de médicos e atendentes. Poderá realizar qualquer operação em relaçao a uma consulta, como criar/editar/consultar/excluir.
 
+## Features que serão implementadas
+
+Endpoint da agenda do diária do médico(get com todos as consultas agendadas para o dia atual)
+Endpoint de cancelamento da agenda diária.
+Endpoint para reagendamento de uma consulta
+
 # Tecnologias utilizadas
 ## Back end
 - Java
