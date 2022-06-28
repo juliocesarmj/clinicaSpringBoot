@@ -19,9 +19,9 @@ Caso o cpf nao exista no sistema, é solicitado alguns dados para cadastro e pos
 
 ## Features que serão implementadas
 
-Endpoint da agenda do diária do médico(get com todos as consultas agendadas para o dia atual)
-Endpoint de cancelamento da agenda diária.
-Endpoint para reagendamento de uma consulta
+-- Endpoint da agenda do diária do médico(get com todos as consultas agendadas para o dia atual)
+-- Endpoint de cancelamento da agenda diária.
+-- Endpoint para reagendamento de uma consulta
 
 # Tecnologias utilizadas
 ## Back end
