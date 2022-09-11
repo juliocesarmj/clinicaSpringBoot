@@ -13,7 +13,6 @@ public class MedicoMapper {
                 .crm(dto.getCrm())
                 .valorConsulta(dto.getValorConsulta())
                 .dataNascimento(dto.getDataNascimento())
-                .especialidade(dto.getEspecialidade())
                 .build();
     }
 }

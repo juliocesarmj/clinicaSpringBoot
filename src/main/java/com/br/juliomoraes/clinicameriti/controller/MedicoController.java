@@ -2,10 +2,8 @@ package com.br.juliomoraes.clinicameriti.controller;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
-import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
 import com.br.juliomoraes.clinicameriti.services.IMedicoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +22,9 @@ public class MedicoController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
 
-	@GetMapping("/especialidades/{especialidade}")
-	public ResponseEntity<List<MedicoResponseDto>> medicosPorEspecialidade(@PathVariable("especialidade") Especialidade especialidade) {
-		return ResponseEntity.status(HttpStatus.OK).body(this.service.medicosPorEspecialidade(especialidade));
+	@GetMapping("/especialidades/{especialidadeId}")
+	public ResponseEntity<List<MedicoResponseDto>> medicosPorEspecialidade(@PathVariable("especialidadeId") final Long especialidadeId) {
+		return ResponseEntity.status(HttpStatus.OK).body(this.service.medicosPorEspecialidade(especialidadeId));
 	}
 
 	@PutMapping(value = "/{idMedico}")

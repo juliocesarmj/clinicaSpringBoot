@@ -1,10 +1,9 @@
 package com.br.juliomoraes.clinicameriti.services;
 
-import java.util.List;
-
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
-import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
+
+import java.util.List;
 
 public interface IMedicoService {
 
@@ -18,5 +17,5 @@ public interface IMedicoService {
 
 	List<MedicoResponseDto> medicos();
 
-	List<MedicoResponseDto> medicosPorEspecialidade(final Especialidade especialidade);
+	List<MedicoResponseDto> medicosPorEspecialidade(final Long especialidadeId);
 }

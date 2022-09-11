@@ -1,7 +1,7 @@
 package com.br.juliomoraes.clinicameriti.model.medico;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
-import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
+import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -21,6 +21,8 @@ public class Medico {
 	private String nome;
 	private String crm;
 	private LocalDate dataNascimento;
+	@ManyToOne
+	@JoinColumn(name = "especialidade_id")
 	private Especialidade especialidade;
 	private Double valorConsulta;
 
@@ -76,7 +78,6 @@ public class Medico {
 		this.nome = dto.getNome();
 		this.crm = dto.getCrm();
 		this.dataNascimento = dto.getDataNascimento();
-		this.especialidade = dto.getEspecialidade();
 		this.valorConsulta = dto.getValorConsulta();
 	}
 }

@@ -2,34 +2,35 @@ package com.br.juliomoraes.clinicameriti.services;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
-import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
+import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
 import com.br.juliomoraes.clinicameriti.model.medico.Medico;
 import com.br.juliomoraes.clinicameriti.model.medico.MedicoMapper;
+import com.br.juliomoraes.clinicameriti.repository.IEspecialidadeRepository;
 import com.br.juliomoraes.clinicameriti.repository.IMedicoRepository;
 import com.br.juliomoraes.clinicameriti.services.exceptions.EspecialidadeException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.MedicoExistsException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class MedicoService implements IMedicoService {
     private final IMedicoRepository repository;
+    private final IEspecialidadeRepository especialidadeRepository;
 
     @Override
     public void novoMedico(final MedicoDTO dto) {
         this.validaExisteMedicoCRM(dto.getCrm());
-        this.repository.save(MedicoMapper.copyDtoFromEntity(dto));
+        Especialidade especialidade = this.getByEspecialidadeId(dto.getEspecialidadeId());
+        Medico medico = MedicoMapper.copyDtoFromEntity(dto);
+        medico.setEspecialidade(especialidade);
+        this.repository.save(medico);
     }
     @Override
     @Transactional(readOnly = true)
@@ -38,12 +39,9 @@ public class MedicoService implements IMedicoService {
     }
     @Override
     @Transactional(readOnly = true)
-    public List<MedicoResponseDto> medicosPorEspecialidade(final Especialidade especialidade) {
-        if (Objects.nonNull(especialidade)) {
-            return this.repository.findAllByEspecialidade(especialidade).stream().map(MedicoResponseDto::new).collect(Collectors.toList());
-        }
-        throw new EspecialidadeException(MessageException.ESPECIALIDADE_NAO_EXISTE.getMensagem());
-
+    public List<MedicoResponseDto> medicosPorEspecialidade(final Long especialidadeId) {
+        this.getByEspecialidadeId(especialidadeId);
+        return this.repository.findAllByEspecialidade_Id(especialidadeId).stream().map(MedicoResponseDto::new).collect(Collectors.toList());
     }
     @Override
     public void alterarMedico(final Long idMedico, final MedicoDTO dto) {
@@ -73,4 +71,7 @@ public class MedicoService implements IMedicoService {
         }
     }
 
+    private Especialidade getByEspecialidadeId(final Long especialidadeId) {
+       return this.especialidadeRepository.findById(especialidadeId).orElseThrow(() -> new EspecialidadeException(MessageException.ESPECIALIDADE_NAO_EXISTE.getMensagem()));
+    }
 }

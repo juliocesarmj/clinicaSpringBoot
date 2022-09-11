@@ -1,6 +1,5 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +20,7 @@ public class MedicoDTO {
 	@PastOrPresent(message = "Informe uma data de nascimento válida.")
 	private LocalDate dataNascimento;
 
-	@NotEmpty(message = "Informe uma especialidade válida")
-	private Especialidade especialidade;
+	private long especialidadeId;
 
 	@DecimalMin(value = "0.1", message = "Informe um valor de consulta válido.")
 	@DecimalMax(value = "200.0", message = "Informe um valor de consulta válido.")
