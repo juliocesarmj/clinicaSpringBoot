@@ -1,22 +1,17 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
 import com.br.juliomoraes.clinicameriti.enums.especialidades.Especialidade;
-import com.br.juliomoraes.clinicameriti.model.medico.Medico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicoDTO {
-	private Long id;
-
 	@NotEmpty(message = "Informe um nome válido")
 	private String nome;
 
@@ -26,16 +21,10 @@ public class MedicoDTO {
 	@PastOrPresent(message = "Informe uma data de nascimento válida.")
 	private LocalDate dataNascimento;
 
+	@NotEmpty(message = "Informe uma especialidade válida")
 	private Especialidade especialidade;
 
+	@DecimalMin(value = "0.1", message = "Informe um valor de consulta válido.")
+	@DecimalMax(value = "200.0", message = "Informe um valor de consulta válido.")
 	private Double valorConsulta;
-
-	public MedicoDTO(final Medico entidade) {
-		this.id = entidade.getId();
-		this.nome = entidade.getNome();
-		this.crm = entidade.getCrm();
-		this.dataNascimento = entidade.getDataNascimento();
-		this.especialidade = entidade.getEspecialidade();
-		this.valorConsulta = entidade.getValorConsulta();
-	}
 }

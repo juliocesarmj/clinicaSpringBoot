@@ -27,4 +27,9 @@ public class ConsultaController {
     public ResponseEntity<ConsultaCompletaDTO> consultaPorId(@PathVariable Long id){
         return ResponseEntity.ok().body(this.service.consultaPorId(id));
     }
+
+    @GetMapping("/consultapornome/{nome}")
+    public ResponseEntity<ConsultaCompletaDTO> findByNomePaciente(@PathVariable("nome") String nome){
+        return ResponseEntity.ok().body(this.service.consultaPorNome(nome));
+    }
 }

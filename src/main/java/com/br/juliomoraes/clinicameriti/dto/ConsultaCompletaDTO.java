@@ -21,14 +21,14 @@ public class ConsultaCompletaDTO {
     private TipoStatusConsulta statusConsulta;
     private TipoStatusPagamento statusPagamento;
     private LocalDate dataAgendamento;
-    private PacienteDTO pacienteDTO;
-    private MedicoDTO medicoDTO;
+    private PacienteDTO paciente;
+    private MedicoResponseDto medico;
     private String observacoesMedico;
 
     public static ConsultaCompletaDTO copyEntityFromDto(Consulta consulta) {
         return ConsultaCompletaDTO.builder()
-                .medicoDTO(new MedicoDTO(consulta.getMedico()))
-                .pacienteDTO(new PacienteDTO(consulta.getPaciente()))
+                .medico(new MedicoResponseDto(consulta.getMedico()))
+                .paciente(new PacienteDTO(consulta.getPaciente()))
                 .id(consulta.getId())
                 .dataRegistroConsulta(consulta.getDataRegistroConsulta())
                 .statusConsulta(consulta.getStatusConsulta())

@@ -46,4 +46,8 @@ public class ConsultaService {
         return ConsultaCompletaDTO.copyEntityFromDto(this.consultaRepository.findById(id)
                 .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
     }
+    public ConsultaCompletaDTO consultaPorNome(String nome) {
+        return ConsultaCompletaDTO.copyEntityFromDto(this.consultaRepository.findByPaciente_Nome(nome)
+                .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
+    }
 }

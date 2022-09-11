@@ -9,7 +9,6 @@ public class MedicoMapper {
 
     public static Medico copyDtoFromEntity(MedicoDTO dto) {
         return Medico.builder()
-                .id(dto.getId())
                 .nome(dto.getNome())
                 .crm(dto.getCrm())
                 .valorConsulta(dto.getValorConsulta())
