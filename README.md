@@ -47,6 +47,9 @@ git clone https://github.com/juliocesarmj/clinicaSpringBoot
 
 # Endpoints disponíveis até o momento:
 
+# Página Swagger com os endpoints disponíveis até o momento
+http://localhost:8082/swagger-ui/index.html
+
 # Paciente
 
 ## POST
