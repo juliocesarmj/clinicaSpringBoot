@@ -3,6 +3,8 @@ package com.br.juliomoraes.clinicameriti.controller;
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
 import com.br.juliomoraes.clinicameriti.services.IMedicoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,38 +16,45 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/medico")
 @RequiredArgsConstructor
+@Api(tags = "Medicos")
 public class MedicoController {
 	final IMedicoService service;
+	@ApiOperation("Serviço de cadastro de um médico")
 	@PostMapping
 	public ResponseEntity<Void> novoMedico(@RequestBody @Valid final MedicoDTO dto) {
 		this.service.novoMedico(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
 
+	@ApiOperation("Serviço de consulta de médicos por especialidade")
 	@GetMapping("/especialidades/{especialidadeId}")
 	public ResponseEntity<List<MedicoResponseDto>> medicosPorEspecialidade(@PathVariable("especialidadeId") final Long especialidadeId) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.service.medicosPorEspecialidade(especialidadeId));
 	}
 
-	@PutMapping(value = "/{idMedico}")
-	public ResponseEntity<Void> alterarMedico(@PathVariable("idMedico") final Long idMedico, @RequestBody final MedicoDTO dto) {
-		this.service.alterarMedico(idMedico, dto);
+	@ApiOperation("Serviço de atualização dos dados de um médico por ID")
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Void> alterarMedico(@PathVariable("id") final Long id, @RequestBody final MedicoDTO dto) {
+		this.service.alterarMedico(id, dto);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
 
+	@ApiOperation("Serviço de consulta de todos os médicos cadastrados.")
 	@GetMapping
 	public ResponseEntity<List<MedicoResponseDto>> medicos() {
 		return ResponseEntity.status(HttpStatus.OK).body(this.service.medicos());
 	}
 
-	@DeleteMapping(value = "/{idMedico}")
-	public ResponseEntity<Void> excluirMedico(@PathVariable("idMedico") final Long idMedico) {
-		this.service.excluirMedico(idMedico);
+	@ApiOperation("Serviço de exclusão de um cadastro de um médico")
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> excluirMedico(@PathVariable("id") final Long id) {
+		this.service.excluirMedico(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
 
-	@GetMapping(value = "/{idMedico}")
-	public ResponseEntity<MedicoResponseDto> consultarMedico(@PathVariable("idMedico") final Long idMedico) {
-		return ResponseEntity.ok(this.service.consultarMedico(idMedico));
+	@ApiOperation("Serviço de consulta dos dados de um médico por ID")
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<MedicoResponseDto> consultarMedico(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(this.service.consultarMedico(id));
 	}
 }

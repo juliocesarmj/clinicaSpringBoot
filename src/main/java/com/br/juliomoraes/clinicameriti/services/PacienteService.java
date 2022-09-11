@@ -2,6 +2,7 @@ package com.br.juliomoraes.clinicameriti.services;
 
 import com.br.juliomoraes.clinicameriti.dto.EnderecoDTO;
 import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
+import com.br.juliomoraes.clinicameriti.dto.PacienteResponseDto;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
 import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
@@ -50,22 +51,22 @@ public class PacienteService {
                 dto.getBairro());
     }
 
-    public Page<PacienteDTO> pacientes(Pageable pageable) {
-        return this.pacienteRepository.findAll(pageable).map(PacienteDTO::new);
+    public Page<PacienteResponseDto> pacientes(Pageable pageable) {
+        return this.pacienteRepository.findAll(pageable).map(PacienteResponseDto::new);
     }
 
-    public PacienteDTO pacientePorId(Long id) {
+    public PacienteResponseDto pacientePorId(Long id) {
         Optional<Paciente> result = this.pacienteRepository.findById(id);
-        return new PacienteDTO(result
+        return new PacienteResponseDto(result
                 .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
     }
 
-    public PacienteDTO pacientePorCpf(String cpf) {
+    public PacienteResponseDto pacientePorCpf(String cpf) {
         if (cpf != null && cpf.length() == 11) {
             Paciente result = this.pacienteRepository
                     .findByCpfOptional(cpf)
                     .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem()));
-            return new PacienteDTO(result);
+            return new PacienteResponseDto(result);
         }
         throw new StandardException(MessageException.CPF_INVALIDO.getMensagem());
     }

@@ -14,8 +14,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 public class PacienteDTO {
-
-	private Long id;
 	private String nome;
 	@Email(message = "Informe um email válido")
 	private String email;
@@ -29,7 +27,6 @@ public class PacienteDTO {
 	private EnderecoDTO endereco;
 
 	public PacienteDTO(Paciente paciente) {
-		id = paciente.getId();
 		nome = paciente.getNome();
 		email = paciente.getEmail();
 		telefone = paciente.getTelefone();
