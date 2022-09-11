@@ -2,6 +2,7 @@ package com.br.juliomoraes.clinicameriti.controller.exceptions;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data

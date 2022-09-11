@@ -17,7 +17,6 @@ public class PacienteDTO {
 
 	private Long id;
 	private String nome;
-
 	@Email(message = "Informe um email válido")
 	private String email;
 	private String telefone;
@@ -27,7 +26,7 @@ public class PacienteDTO {
 
 	@Size(min = 11, max = 11 ,message = "Cpf inválido")
 	private String cpf;
-	private EnderecoDTO enderecoDTO;
+	private EnderecoDTO endereco;
 
 	public PacienteDTO(Paciente paciente) {
 		id = paciente.getId();
@@ -36,6 +35,6 @@ public class PacienteDTO {
 		telefone = paciente.getTelefone();
 		dataNascimento = paciente.getDataNascimento();
 		cpf = paciente.getCpf();
-		enderecoDTO = EnderecoDTO.copyEntityFromDto(paciente.getEndereco());
+		endereco = EnderecoDTO.copyEntityFromDto(paciente.getEndereco());
 	}
 }

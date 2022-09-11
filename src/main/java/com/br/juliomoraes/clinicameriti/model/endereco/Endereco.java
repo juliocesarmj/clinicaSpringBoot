@@ -16,7 +16,6 @@ import java.util.List;
 @Entity
 @Table(name = "endereco")
 @AllArgsConstructor
-@Data
 @NoArgsConstructor
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -46,11 +45,76 @@ public class Endereco implements Serializable {
 	@Column(nullable = false, length = 8)
 	private String cep;
 
-	@OneToOne
-	@JoinColumn(name = "paciente_id", unique = true)
+	@OneToMany(mappedBy = "endereco")
 	@JsonIgnore
-	private Paciente paciente;
+	private List<Paciente> pacientes = new ArrayList<>();
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getRuaOuAvenida() {
+		return ruaOuAvenida;
+	}
+
+	public void setRuaOuAvenida(String ruaOuAvenida) {
+		this.ruaOuAvenida = ruaOuAvenida;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
 	public static Endereco novo(EnderecoDTO dto) {
 		Endereco endereco = new Endereco();
 		endereco.setBairro(dto.getBairro());

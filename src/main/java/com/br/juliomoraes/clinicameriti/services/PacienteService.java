@@ -1,5 +1,6 @@
 package com.br.juliomoraes.clinicameriti.services;
 
+import com.br.juliomoraes.clinicameriti.dto.EnderecoDTO;
 import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
@@ -7,7 +8,7 @@ import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
 import com.br.juliomoraes.clinicameriti.repository.IEnderecoRepository;
 import com.br.juliomoraes.clinicameriti.repository.IPacienteRepository;
 import com.br.juliomoraes.clinicameriti.services.exceptions.StandardException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PacienteService {
+    private final IPacienteRepository pacienteRepository;
 
-    @Autowired
-    private IPacienteRepository pacienteRepository;
-
-    @Autowired
-    private IEnderecoRepository enderecoRepository;
+    private final IEnderecoRepository enderecoRepository;
 
     public void novo(PacienteDTO dto) {
 
@@ -30,12 +29,25 @@ public class PacienteService {
         this.validaTelefone(dto.getTelefone());
 
         Paciente paciente = Paciente.novo(dto);
-        Endereco endereco = Endereco.novo(dto.getEnderecoDTO());
+        Endereco enderecoQuery = getEndereco(dto.getEndereco());
+
+        if (enderecoQuery != null) {
+            paciente.setEndereco(enderecoQuery);
+        } else {
+            Endereco endereco = Endereco.novo(dto.getEndereco());
+            this.enderecoRepository.save(endereco);
+            paciente.setEndereco(endereco);
+        }
 
         this.pacienteRepository.save(paciente);
-        endereco.setPaciente(paciente);
-        this.enderecoRepository.save(endereco);
+    }
 
+    private Endereco getEndereco(EnderecoDTO dto) {
+        return this.enderecoRepository.findEnderecoByParams(dto.getRuaOuAvenida(),
+                dto.getNumero(),
+                dto.getCep(),
+                dto.getComplemento(),
+                dto.getBairro());
     }
 
     public Page<PacienteDTO> pacientes(Pageable pageable) {
