@@ -1,6 +1,7 @@
 package com.br.juliomoraes.clinicameriti.model.medico;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
 import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -25,6 +28,9 @@ public class Medico {
 	@JoinColumn(name = "especialidade_id")
 	private Especialidade especialidade;
 	private Double valorConsulta;
+
+	@OneToMany(mappedBy = "medico")
+	private List<Consulta> consultas = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -72,6 +78,10 @@ public class Medico {
 
 	public void setValorConsulta(Double valorConsulta) {
 		this.valorConsulta = valorConsulta;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
 	}
 
 	public void atualizaDadosMedico(MedicoDTO dto) {

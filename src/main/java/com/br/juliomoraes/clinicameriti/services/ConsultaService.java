@@ -15,7 +15,9 @@ import com.br.juliomoraes.clinicameriti.services.exceptions.StandardException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ConsultaService {
@@ -46,8 +48,8 @@ public class ConsultaService {
         return ConsultaCompletaDTO.copyEntityFromDto(this.consultaRepository.findById(id)
                 .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
     }
-    public ConsultaCompletaDTO consultaPorNome(String nome) {
-        return ConsultaCompletaDTO.copyEntityFromDto(this.consultaRepository.findByPaciente_Nome(nome)
-                .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
+    public List<ConsultaCompletaDTO> consultaPorNome(String nome) {
+        return this.consultaRepository.findByPacienteNomeContainingIgnoreCase(nome).stream().map(ConsultaCompletaDTO::copyEntityFromDto)
+                .collect(Collectors.toList());
     }
 }

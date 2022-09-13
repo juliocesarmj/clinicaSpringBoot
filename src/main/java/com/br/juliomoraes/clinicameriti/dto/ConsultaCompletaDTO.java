@@ -3,6 +3,7 @@ package com.br.juliomoraes.clinicameriti.dto;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
 import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,18 +18,22 @@ import java.time.LocalDate;
 public class ConsultaCompletaDTO {
 
     private Long id;
+
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate dataRegistroConsulta;
     private TipoStatusConsulta statusConsulta;
     private TipoStatusPagamento statusPagamento;
+
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate dataAgendamento;
-    private PacienteDTO paciente;
+    private PacienteResponseDto paciente;
     private MedicoResponseDto medico;
     private String observacoesMedico;
 
     public static ConsultaCompletaDTO copyEntityFromDto(Consulta consulta) {
         return ConsultaCompletaDTO.builder()
                 .medico(new MedicoResponseDto(consulta.getMedico()))
-                .paciente(new PacienteDTO(consulta.getPaciente()))
+                .paciente(new PacienteResponseDto(consulta.getPaciente()))
                 .id(consulta.getId())
                 .dataRegistroConsulta(consulta.getDataRegistroConsulta())
                 .statusConsulta(consulta.getStatusConsulta())

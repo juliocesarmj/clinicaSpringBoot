@@ -1,6 +1,7 @@
 package com.br.juliomoraes.clinicameriti.model.paciente;
 
 import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
+import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
 import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,6 +12,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "paciente")
@@ -35,10 +38,12 @@ public class Paciente {
 
 	@Column(nullable = false, unique = true, length = 11)
 	private String cpf;
-
 	@ManyToOne
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
+
+	@OneToMany(mappedBy = "paciente")
+	private List<Consulta> consultas = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -94,6 +99,10 @@ public class Paciente {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
 	}
 
 	public static Paciente novo(PacienteDTO dto) {

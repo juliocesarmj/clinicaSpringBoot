@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/consulta")
@@ -36,7 +37,7 @@ public class ConsultaController {
 
     @ApiOperation("Serviço de consulta de um agendamento por nome do paciente")
     @GetMapping("/findbyname/{nome}")
-    public ResponseEntity<ConsultaCompletaDTO> findByNomePaciente(@PathVariable("nome") String nome){
+    public ResponseEntity<List<ConsultaCompletaDTO>> findByNomePaciente(@PathVariable("nome") String nome){
         return ResponseEntity.ok().body(this.service.consultaPorNome(nome));
     }
 }

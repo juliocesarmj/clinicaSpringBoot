@@ -24,11 +24,13 @@ public class Consulta {
 	private Long id;
 
 	@ManyToOne
+	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
 	private LocalDate dataRegistroConsulta;
 
 	@ManyToOne
+	@JoinColumn(name = "medico_id")
 	private Medico medico;
 
 	@Enumerated(EnumType.STRING)
