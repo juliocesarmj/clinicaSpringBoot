@@ -37,23 +37,27 @@ public class MedicoService implements IMedicoService {
         medico.setUsuarioId(usuarioGetDTO.getId());
         this.repository.save(medico);
     }
+    
     @Override
     @Transactional(readOnly = true)
     public List<MedicoResponseDto> medicos() {
         return this.repository.findAll().stream().map(MedicoResponseDto::new).collect(Collectors.toList());
     }
+    
     @Override
     @Transactional(readOnly = true)
     public List<MedicoResponseDto> medicosPorEspecialidade(final Long especialidadeId) {
         this.getByEspecialidadeId(especialidadeId);
         return this.repository.findAllByEspecialidade_Id(especialidadeId).stream().map(MedicoResponseDto::new).collect(Collectors.toList());
     }
+    
     @Override
     public void alterarMedico(final Long idMedico, final MedicoDTO dto) {
         Medico medico = this.pesquisarMedico(idMedico);
         medico.atualizaDadosMedico(dto);
         this.repository.save(medico);
     }
+    
     @Override
     public void excluirMedico(final Long idMedico) {
         this.pesquisarMedico(idMedico);
@@ -70,6 +74,7 @@ public class MedicoService implements IMedicoService {
         return this.repository.findById(idMedico)
                 .orElseThrow(() -> new ObjectNotFoundException(MessageException.MEDICO_NAO_EXISTE.getMensagem()));
     }
+    
     private void validaExisteMedicoCRM(final String crm) {
         if (this.repository.findByCrm(crm).isPresent()) {
             throw new MedicoExistsException(MessageException.MEDICO_EXISTE_CRM.getMensagem());

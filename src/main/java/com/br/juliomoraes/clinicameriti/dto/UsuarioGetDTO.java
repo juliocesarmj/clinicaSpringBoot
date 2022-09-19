@@ -17,14 +17,12 @@ public class UsuarioGetDTO {
 	private Long id;
 	private String nomeUsuario;
 	private String email;
-	private String senha;
 	private Set<PerfilGetDTO> perfis = new HashSet<>();
 	
 	public UsuarioGetDTO(Usuario entidade) {
 		this.id = entidade.getId();
 		this.nomeUsuario = entidade.getNomeUsuario();
 		this.email = entidade.getEmail();
-		this.senha = entidade.getSenha();
 		entidade.getPerfis().forEach(perfil -> this.perfis.add(new PerfilGetDTO(perfil)));
 	}
 }
