@@ -1,16 +1,25 @@
 package com.br.juliomoraes.clinicameriti.model.medico;
 
-import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
-import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
-import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
+import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
@@ -18,12 +27,14 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "medico")
 public class Medico {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String crm;
 	private LocalDate dataNascimento;
+	
 	@ManyToOne
 	@JoinColumn(name = "especialidade_id")
 	private Especialidade especialidade;
@@ -31,6 +42,8 @@ public class Medico {
 
 	@OneToMany(mappedBy = "medico")
 	private List<Consulta> consultas = new ArrayList<>();
+	
+	private Long usuarioId;
 
 	public Long getId() {
 		return id;
@@ -83,7 +96,15 @@ public class Medico {
 	public List<Consulta> getConsultas() {
 		return consultas;
 	}
+	
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
 
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+	
 	public void atualizaDadosMedico(MedicoDTO dto) {
 		this.nome = dto.getNome();
 		this.crm = dto.getCrm();

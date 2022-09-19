@@ -25,4 +25,6 @@ public class MedicoDTO {
 	@DecimalMin(value = "0.1", message = "Informe um valor de consulta válido.")
 	@DecimalMax(value = "200.0", message = "Informe um valor de consulta válido.")
 	private Double valorConsulta;
+	
+	private UsuarioPostDto usuario;
 }

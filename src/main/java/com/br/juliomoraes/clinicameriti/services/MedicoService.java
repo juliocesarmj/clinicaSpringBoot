@@ -2,6 +2,7 @@ package com.br.juliomoraes.clinicameriti.services;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
+import com.br.juliomoraes.clinicameriti.dto.UsuarioGetDTO;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
 import com.br.juliomoraes.clinicameriti.model.medico.Medico;
@@ -21,8 +22,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MedicoService implements IMedicoService {
+	
     private final IMedicoRepository repository;
     private final IEspecialidadeRepository especialidadeRepository;
+    private final IUserService userService;
 
     @Override
     public void novoMedico(final MedicoDTO dto) {
@@ -30,6 +33,8 @@ public class MedicoService implements IMedicoService {
         Especialidade especialidade = this.getByEspecialidadeId(dto.getEspecialidadeId());
         Medico medico = MedicoMapper.copyDtoFromEntity(dto);
         medico.setEspecialidade(especialidade);
+        UsuarioGetDTO usuarioGetDTO = this.userService.create(dto.getUsuario());
+        medico.setUsuarioId(usuarioGetDTO.getId());
         this.repository.save(medico);
     }
     @Override
