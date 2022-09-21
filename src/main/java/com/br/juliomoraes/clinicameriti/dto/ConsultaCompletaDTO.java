@@ -2,7 +2,7 @@ package com.br.juliomoraes.clinicameriti.dto;
 
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
-import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
+import com.br.juliomoraes.clinicameriti.model.Consulta;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

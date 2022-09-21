@@ -1,12 +1,13 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import com.br.juliomoraes.clinicameriti.model.endereco.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
+
+import com.br.juliomoraes.clinicameriti.model.Endereco;
 
 @Data
 @NoArgsConstructor

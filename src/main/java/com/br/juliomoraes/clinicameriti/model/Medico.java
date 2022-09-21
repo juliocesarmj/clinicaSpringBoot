@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.model.medico;
+package com.br.juliomoraes.clinicameriti.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,8 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
-import com.br.juliomoraes.clinicameriti.model.consulta.Consulta;
-import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

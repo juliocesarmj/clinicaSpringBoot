@@ -1,10 +1,9 @@
-package com.br.juliomoraes.clinicameriti.model.consulta;
+package com.br.juliomoraes.clinicameriti.model;
 
 import com.br.juliomoraes.clinicameriti.dto.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
-import com.br.juliomoraes.clinicameriti.model.medico.Medico;
-import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

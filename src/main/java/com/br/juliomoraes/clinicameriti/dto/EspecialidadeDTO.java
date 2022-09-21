@@ -1,6 +1,7 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import com.br.juliomoraes.clinicameriti.model.especialidade.Especialidade;
+import com.br.juliomoraes.clinicameriti.model.Especialidade;
+
 import lombok.Data;
 
 @Data

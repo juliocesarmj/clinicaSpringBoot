@@ -1,6 +1,5 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -8,6 +7,9 @@ import lombok.experimental.SuperBuilder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
+
+import com.br.juliomoraes.clinicameriti.model.Paciente;
+
 import java.time.LocalDate;
 
 @Data

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.br.juliomoraes.clinicameriti.dto.PerfilGetDTO;
@@ -23,6 +24,7 @@ public class UserService implements IUserService {
 
 	final IUsuarioRepository usuarioRepository;
 	final IPerfilRepository perfilRepository;
+	final BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public Page<UsuarioGetDTO> findAllPaged(Pageable pageable) {
@@ -38,6 +40,7 @@ public class UserService implements IUserService {
 	public UsuarioGetDTO create(UsuarioPostDto dto) {
 		this.validaPerfis(dto.getPerfis());
 		Usuario usuario = Usuario.novo(dto);
+		usuario.setSenha(this.passwordEncoder.encode(dto.getSenha()));
 		dto.getPerfis().forEach(perfil -> usuario.getPerfis().add(this.getPerfil(perfil.getId())));
 		this.usuarioRepository.save(usuario);
 		return new UsuarioGetDTO(usuario);

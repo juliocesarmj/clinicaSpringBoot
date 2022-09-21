@@ -1,6 +1,7 @@
 package com.br.juliomoraes.clinicameriti.model.medico;
 
 import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.model.Medico;
 
 public class MedicoMapper {
 

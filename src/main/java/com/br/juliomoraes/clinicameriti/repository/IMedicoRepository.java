@@ -1,7 +1,8 @@
 package com.br.juliomoraes.clinicameriti.repository;
 
-import com.br.juliomoraes.clinicameriti.model.medico.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.br.juliomoraes.clinicameriti.model.Medico;
 
 import java.util.List;
 import java.util.Optional;

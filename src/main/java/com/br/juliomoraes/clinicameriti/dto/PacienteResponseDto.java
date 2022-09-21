@@ -1,6 +1,6 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import com.br.juliomoraes.clinicameriti.model.paciente.Paciente;
+import com.br.juliomoraes.clinicameriti.model.Paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 

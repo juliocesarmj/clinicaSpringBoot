@@ -36,6 +36,8 @@ public class Usuario implements Serializable {
 		joinColumns = @JoinColumn(name = "usuario_id"),
 		inverseJoinColumns = @JoinColumn(name = "perfil_id"))
 	private Set<Perfil> perfis = new HashSet<>();
+	
+	private boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -73,12 +75,19 @@ public class Usuario implements Serializable {
 		return perfis;
 	}
 	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	public static Usuario novo(UsuarioPostDto dto) {
 		Usuario usuario = new Usuario();
 		usuario.setNomeUsuario(dto.getNomeUsuario());
 		usuario.setEmail(dto.getEmail());
-		usuario.setSenha(dto.getSenha());
-		
+		usuario.setAtivo(true);
 		return usuario;
 	}
 }

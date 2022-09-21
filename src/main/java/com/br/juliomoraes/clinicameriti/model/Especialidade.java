@@ -1,6 +1,4 @@
-package com.br.juliomoraes.clinicameriti.model.especialidade;
-
-import com.br.juliomoraes.clinicameriti.model.medico.Medico;
+package com.br.juliomoraes.clinicameriti.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
