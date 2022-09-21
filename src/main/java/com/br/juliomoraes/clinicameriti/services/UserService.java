@@ -1,9 +1,13 @@
 package com.br.juliomoraes.clinicameriti.services;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +21,12 @@ import com.br.juliomoraes.clinicameriti.repository.IUsuarioRepository;
 import com.br.juliomoraes.clinicameriti.services.exceptions.ObjectNotFoundException;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IUserService {
+@Slf4j
+public class UserService implements IUserService, UserDetailsService {
 
 	final IUsuarioRepository usuarioRepository;
 	final IPerfilRepository perfilRepository;
@@ -64,5 +70,17 @@ public class UserService implements IUserService {
 	private Perfil getPerfil(Long id) {
 		return this.perfilRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Perfil não encontrado."));
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<Usuario> user = this.usuarioRepository.findByEmail(username);
+		
+		if(user.isEmpty()) {
+			log.error("Usuário não encontrado: " + username);
+			throw new UsernameNotFoundException("Usuário não encontrado");
+		}
+		log.info("Usuário encontrado: " + username);
+		return user.get();
 	}
 }
