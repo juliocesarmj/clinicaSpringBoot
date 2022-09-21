@@ -27,13 +27,14 @@ Caso o cpf nao exista no sistema, é solicitado alguns dados para cadastro e pos
 ## Back end
 - Java
 - Spring Boot
+- Spring Security
 - JPA / Hibernate
 - Maven
 - Lombok
-- H2 Database
+- PostgreSQL
 
 ## Back end
-Pré-requisitos: Java 11
+Pré-requisitos: Java 11, postgresql-12
 
 ```bash
 # clonar repositório
