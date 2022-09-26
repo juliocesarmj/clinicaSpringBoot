@@ -102,13 +102,8 @@ public class Usuario implements Serializable, UserDetails {
 	}
 
 	@Override
-	public String getPassword() {
-		return "hoje nao";
-	}
-
-	@Override
 	public String getUsername() {
-		return this.email;
+		return email;
 	}
 
 	@Override
@@ -129,5 +124,10 @@ public class Usuario implements Serializable, UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getPassword() {
+		return getSenha();
 	}
 }
