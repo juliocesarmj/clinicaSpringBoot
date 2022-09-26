@@ -14,11 +14,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/medico")
+@RequestMapping(value = "/medicos")
 @RequiredArgsConstructor
 @Api(tags = "Medicos")
 public class MedicoController {
+	
 	final IMedicoService service;
+	
 	@ApiOperation("Serviço de cadastro de um médico")
 	@PostMapping
 	public ResponseEntity<Void> novoMedico(@RequestBody @Valid final MedicoDTO dto) {
