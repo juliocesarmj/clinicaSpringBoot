@@ -54,6 +54,7 @@ public class MedicoService implements IMedicoService {
     @Override
     public void alterarMedico(final Long idMedico, final MedicoDTO dto) {
         Medico medico = this.pesquisarMedico(idMedico);
+        this.validaExisteMedicoCRM(dto.getCrm());
         medico.atualizaDadosMedico(dto);
         this.repository.save(medico);
     }
@@ -64,6 +65,7 @@ public class MedicoService implements IMedicoService {
         this.repository.deleteById(idMedico);
 
     }
+    
     @Override
     @Transactional(readOnly = true)
     public MedicoResponseDto consultarMedico(final Long idMedico) {

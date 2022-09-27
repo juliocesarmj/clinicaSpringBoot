@@ -36,7 +36,7 @@ public class MedicoController {
 
 	@ApiOperation("Serviço de atualização dos dados de um médico por ID")
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> alterarMedico(@PathVariable("id") final Long id, @RequestBody final MedicoDTO dto) {
+	public ResponseEntity<Void> alterarMedico(@PathVariable("id") final Long id,@Valid @RequestBody final MedicoDTO dto) {
 		this.service.alterarMedico(id, dto);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 	}
