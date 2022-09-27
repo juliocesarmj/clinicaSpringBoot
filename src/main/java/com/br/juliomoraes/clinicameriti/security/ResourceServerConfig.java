@@ -20,7 +20,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private static final String[] ADMIN_OR_ATENDENTE = {"/consulta/**", "/pacientes/**"};
 	private static final String[] MEDICO = {"/medico"};
 	private static final String[] ATENDENTE_GET = {"/medicos/**"};
-	private static final String[] ADMIN_FULL = {"/consulta/**", "/pacientes/**", "/medicos/**", "/medico/**"};
+	private static final String[] ADMIN_FULL = {"/consulta/**", "/pacientes/**", "/medicos/**", "/medico/**", "/usuarios/**"};
 	private static final String ADMIN = "ADMIN";
 	
 	@Override

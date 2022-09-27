@@ -19,6 +19,7 @@ import com.br.juliomoraes.clinicameriti.model.Usuario;
 import com.br.juliomoraes.clinicameriti.repository.IPerfilRepository;
 import com.br.juliomoraes.clinicameriti.repository.IUsuarioRepository;
 import com.br.juliomoraes.clinicameriti.services.exceptions.ObjectNotFoundException;
+import com.br.juliomoraes.clinicameriti.services.exceptions.StandardException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,9 @@ public class UserService implements IUserService, UserDetailsService {
 
 	@Override
 	public UsuarioGetDTO create(UsuarioPostDto dto) {
+		
 		this.validaPerfis(dto.getPerfis());
+		this.validaEmail(dto.getEmail());
 		Usuario usuario = Usuario.novo(dto);
 		usuario.setSenha(this.passwordEncoder.encode(dto.getSenha()));
 		dto.getPerfis().forEach(perfil -> usuario.getPerfis().add(this.getPerfil(perfil.getId())));
@@ -63,6 +66,9 @@ public class UserService implements IUserService, UserDetailsService {
 	}
 
 	private void validaPerfis(Set<PerfilGetDTO> perfis) {
+		if(perfis.isEmpty()) {
+			throw new StandardException("Informe pelo menos um perfil de acesso para este usuário.");
+		}
 		perfis.forEach(perfil -> this.perfilRepository.findById(perfil.getId()).orElseThrow(
 				() -> new ObjectNotFoundException("Perfil " + perfil.getAuthority() + " não encontrado.")));
 	}
@@ -82,5 +88,11 @@ public class UserService implements IUserService, UserDetailsService {
 		}
 		log.info("Usuário encontrado: " + username);
 		return user.get();
+	}
+	
+	private void validaEmail(String email) {
+		Optional<Usuario> user = this.usuarioRepository.findByEmail(email);
+		if(user.isPresent())
+			throw new StandardException("O email informado já existe.");
 	}
 }
