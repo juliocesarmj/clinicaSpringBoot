@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.paciente;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

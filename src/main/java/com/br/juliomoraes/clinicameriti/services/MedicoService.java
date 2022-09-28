@@ -1,8 +1,8 @@
 package com.br.juliomoraes.clinicameriti.services;
 
-import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
-import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
-import com.br.juliomoraes.clinicameriti.dto.UsuarioGetDTO;
+import com.br.juliomoraes.clinicameriti.dto.medico.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.dto.medico.MedicoResponseDto;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioGetDTO;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.Especialidade;
 import com.br.juliomoraes.clinicameriti.model.Medico;

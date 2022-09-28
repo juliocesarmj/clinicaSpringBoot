@@ -1,8 +1,8 @@
 package com.br.juliomoraes.clinicameriti.services;
 
-import com.br.juliomoraes.clinicameriti.dto.EnderecoDTO;
-import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
-import com.br.juliomoraes.clinicameriti.dto.PacienteResponseDto;
+import com.br.juliomoraes.clinicameriti.dto.paciente.EnderecoDTO;
+import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteDTO;
+import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteResponseDto;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.Endereco;
 import com.br.juliomoraes.clinicameriti.model.Paciente;

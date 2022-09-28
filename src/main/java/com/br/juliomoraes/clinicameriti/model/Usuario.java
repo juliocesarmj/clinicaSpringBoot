@@ -21,7 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.br.juliomoraes.clinicameriti.dto.UsuarioPostDto;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
 
 @Entity
 @Table(name = "usuario")

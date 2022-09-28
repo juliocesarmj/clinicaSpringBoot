@@ -1,9 +1,9 @@
 package com.br.juliomoraes.clinicameriti.services;
 
-import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
-import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
-
 import java.util.List;
+
+import com.br.juliomoraes.clinicameriti.dto.medico.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.dto.medico.MedicoResponseDto;
 
 public interface IMedicoService {
 

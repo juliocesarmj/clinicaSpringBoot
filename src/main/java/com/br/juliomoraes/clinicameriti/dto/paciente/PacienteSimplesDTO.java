@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.paciente;
 
 import java.util.ArrayList;
 import java.util.List;

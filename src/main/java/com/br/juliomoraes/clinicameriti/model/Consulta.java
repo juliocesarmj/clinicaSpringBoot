@@ -1,6 +1,6 @@
 package com.br.juliomoraes.clinicameriti.model;
 
-import com.br.juliomoraes.clinicameriti.dto.ConsultaDTO;
+import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
 

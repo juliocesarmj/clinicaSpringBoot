@@ -1,8 +1,9 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.usuario;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.br.juliomoraes.clinicameriti.dto.perfil.PerfilGetDTO;
 import com.br.juliomoraes.clinicameriti.model.Usuario;
 
 import lombok.AllArgsConstructor;

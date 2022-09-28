@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.perfil;
 
 import com.br.juliomoraes.clinicameriti.model.Perfil;
 

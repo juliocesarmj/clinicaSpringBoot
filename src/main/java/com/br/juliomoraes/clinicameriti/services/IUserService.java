@@ -3,8 +3,8 @@ package com.br.juliomoraes.clinicameriti.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.br.juliomoraes.clinicameriti.dto.UsuarioGetDTO;
-import com.br.juliomoraes.clinicameriti.dto.UsuarioPostDto;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioGetDTO;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
 
 public interface IUserService {
 	

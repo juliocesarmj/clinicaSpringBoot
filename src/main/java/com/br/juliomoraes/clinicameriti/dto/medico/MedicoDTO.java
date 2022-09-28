@@ -1,10 +1,13 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.medico;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
+
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
+
 import java.time.LocalDate;
 
 @Data

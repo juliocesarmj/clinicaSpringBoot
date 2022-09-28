@@ -1,13 +1,11 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.paciente;
+
+import java.time.LocalDate;
 
 import com.br.juliomoraes.clinicameriti.model.Paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import lombok.Data;
 
 @Data
 public class PacienteResponseDto {

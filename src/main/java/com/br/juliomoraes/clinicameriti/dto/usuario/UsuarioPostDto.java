@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.usuario;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.br.juliomoraes.clinicameriti.dto.perfil.PerfilGetDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.juliomoraes.clinicameriti.dto.UsuarioGetDTO;
-import com.br.juliomoraes.clinicameriti.dto.UsuarioPostDto;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioGetDTO;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
 import com.br.juliomoraes.clinicameriti.services.IUserService;
 
 import io.swagger.annotations.Api;

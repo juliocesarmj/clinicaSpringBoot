@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.dto;
+package com.br.juliomoraes.clinicameriti.dto.medico;
 
 import com.br.juliomoraes.clinicameriti.model.Medico;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,7 +1,7 @@
 package com.br.juliomoraes.clinicameriti.controller;
 
-import com.br.juliomoraes.clinicameriti.dto.MedicoDTO;
-import com.br.juliomoraes.clinicameriti.dto.MedicoResponseDto;
+import com.br.juliomoraes.clinicameriti.dto.medico.MedicoDTO;
+import com.br.juliomoraes.clinicameriti.dto.medico.MedicoResponseDto;
 import com.br.juliomoraes.clinicameriti.services.IMedicoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

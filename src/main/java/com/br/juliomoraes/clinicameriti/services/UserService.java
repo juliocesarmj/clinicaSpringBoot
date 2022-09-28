@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.br.juliomoraes.clinicameriti.dto.PerfilGetDTO;
-import com.br.juliomoraes.clinicameriti.dto.UsuarioGetDTO;
-import com.br.juliomoraes.clinicameriti.dto.UsuarioPostDto;
+import com.br.juliomoraes.clinicameriti.dto.perfil.PerfilGetDTO;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioGetDTO;
+import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
 import com.br.juliomoraes.clinicameriti.model.Perfil;
 import com.br.juliomoraes.clinicameriti.model.Usuario;
 import com.br.juliomoraes.clinicameriti.repository.IPerfilRepository;

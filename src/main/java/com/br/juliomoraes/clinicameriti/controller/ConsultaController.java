@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.juliomoraes.clinicameriti.dto.ConsultaCompletaDTO;
-import com.br.juliomoraes.clinicameriti.dto.ConsultaDTO;
-import com.br.juliomoraes.clinicameriti.dto.PacienteSimplesDTO;
+import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaCompletaDTO;
+import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
+import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteSimplesDTO;
 import com.br.juliomoraes.clinicameriti.services.ConsultaService;
 
 import io.swagger.annotations.Api;

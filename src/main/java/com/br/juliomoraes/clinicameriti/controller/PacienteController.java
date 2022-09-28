@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.juliomoraes.clinicameriti.dto.PacienteDTO;
-import com.br.juliomoraes.clinicameriti.dto.PacienteResponseDto;
+import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteDTO;
+import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteResponseDto;
 import com.br.juliomoraes.clinicameriti.services.PacienteService;
 
 import io.swagger.annotations.Api;

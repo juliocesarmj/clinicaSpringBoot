@@ -1,6 +1,6 @@
 package com.br.juliomoraes.clinicameriti.model;
 
-import com.br.juliomoraes.clinicameriti.dto.EnderecoDTO;
+import com.br.juliomoraes.clinicameriti.dto.paciente.EnderecoDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

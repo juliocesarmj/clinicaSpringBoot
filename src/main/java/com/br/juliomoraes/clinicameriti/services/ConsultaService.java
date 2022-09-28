@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.br.juliomoraes.clinicameriti.dto.ConsultaCompletaDTO;
-import com.br.juliomoraes.clinicameriti.dto.ConsultaDTO;
-import com.br.juliomoraes.clinicameriti.dto.PacienteSimplesDTO;
+import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaCompletaDTO;
+import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaSimplesDTO;
+import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteSimplesDTO;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.Consulta;
 import com.br.juliomoraes.clinicameriti.model.Medico;
