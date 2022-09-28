@@ -11,4 +11,6 @@ public interface IMedicoRepository extends JpaRepository<Medico, Long> {
 
 	List<Medico> findAllByEspecialidade_Id(final Long especialidadeId);
 	Optional<Medico> findByCrm(String crm);
+	
+	Medico findByUsuarioId(Long usuarioId);
 }

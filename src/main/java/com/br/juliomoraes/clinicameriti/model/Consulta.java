@@ -45,6 +45,8 @@ public class Consulta {
 
 	@Column(columnDefinition = "TEXT")
 	private String observacoesMedico;
+	
+	private Long usuarioId;
 
 	public static Consulta novo(ConsultaDTO dto, Paciente paciente, Medico medico) {
 		Consulta consulta = new Consulta();

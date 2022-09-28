@@ -35,4 +35,9 @@ public class AuthService implements IAuthService {
 			throw new ForbiddenException("Acesso negado");
 		}
 	}
+
+	@Override
+	public boolean validaSeUsuarioLogadoEMedico(Usuario usuario) {
+		return usuario.temPerfil("ROLE_MEDICO");
+	}
 }

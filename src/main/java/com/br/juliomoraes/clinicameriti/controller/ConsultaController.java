@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaCompletaDTO;
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
+import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaPaginadaDTO;
 import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteSimplesDTO;
 import com.br.juliomoraes.clinicameriti.services.ConsultaService;
 
@@ -54,5 +57,11 @@ public class ConsultaController {
     @GetMapping("/consultas-cpf/{cpf}")
     public ResponseEntity<PacienteSimplesDTO> findConsultasByCpf(@PathVariable("cpf") String cpf){
         return ResponseEntity.ok().body(this.service.consultasPorCpf(cpf));
+    }
+    
+    @ApiOperation("Serviço de listagem de todas as consultas agendadas. Ordenação decrescente por data de agendamento")
+    @GetMapping
+    public ResponseEntity<Page<ConsultaPaginadaDTO>> getConsultas(Pageable pageable) {
+        return ResponseEntity.ok().body(this.service.getConsultasPaginada(pageable));
     }
 }
