@@ -26,6 +26,7 @@ public class MedicoService implements IMedicoService {
     private final IMedicoRepository repository;
     private final IEspecialidadeRepository especialidadeRepository;
     private final IUserService userService;
+    private final IAuthService authService;
 
     @Override
     public void novoMedico(final MedicoDTO dto) {
@@ -54,6 +55,7 @@ public class MedicoService implements IMedicoService {
     @Override
     public void alterarMedico(final Long idMedico, final MedicoDTO dto) {
         Medico medico = this.pesquisarMedico(idMedico);
+        this.authService.validaUsuarioLogadoOuAdmin(medico.getUsuarioId());
         this.validaExisteMedicoCRM(dto.getCrm());
         medico.atualizaDadosMedico(dto);
         this.repository.save(medico);
@@ -62,7 +64,9 @@ public class MedicoService implements IMedicoService {
     @Override
     @Transactional(readOnly = true)
     public MedicoResponseDto consultarMedico(final Long idMedico) {
-        return new MedicoResponseDto(this.pesquisarMedico(idMedico));
+    	Medico medico = this.pesquisarMedico(idMedico);
+    	this.authService.validaUsuarioLogadoOuAdmin(medico.getUsuarioId());
+        return new MedicoResponseDto(medico);
     }
 
     private Medico pesquisarMedico(final Long idMedico) {

@@ -40,7 +40,7 @@ public class UserService implements IUserService, UserDetailsService {
 
 	@Override
 	public UsuarioGetDTO findById(Long id) {
-		return new UsuarioGetDTO(this.getOptionalById(id));
+		return new UsuarioGetDTO(this.getUsuarioById(id));
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class UserService implements IUserService, UserDetailsService {
 		return null;
 	}
 	
-	private Usuario getOptionalById(Long id) {
+	private Usuario getUsuarioById(Long id) {
 		return this.usuarioRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
 	}

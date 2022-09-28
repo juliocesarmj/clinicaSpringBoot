@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.br.juliomoraes.clinicameriti.services.exceptions.EspecialidadeException;
+import com.br.juliomoraes.clinicameriti.services.exceptions.ForbiddenException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.MedicoExistsException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.ObjectNotFoundException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.StandardException;
+import com.br.juliomoraes.clinicameriti.services.exceptions.UnauthorizedException;
 
 @ControllerAdvice
-public class ResourceHandlerException {
+public class ResourceExcepHandler {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
 	private ResponseEntity<StandardError> handlerObjectNotFoundException(final ObjectNotFoundException o,
@@ -47,7 +49,7 @@ public class ResourceHandlerException {
 
 	@ExceptionHandler(EspecialidadeException.class)
 	private ResponseEntity<StandardError> handlerEspecialidadeException(final EspecialidadeException e,
-																		 final HttpServletRequest req) {
+			final HttpServletRequest req) {
 		final StandardError error = new StandardError();
 		error.setTimestamp(LocalDateTime.now());
 		error.setStatus(HttpStatus.NOT_FOUND.value());
@@ -58,8 +60,8 @@ public class ResourceHandlerException {
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
-	private ResponseEntity<StandardError> handlerHttpMessageNotReadableException(final HttpMessageNotReadableException e,
-																		final HttpServletRequest req) {
+	private ResponseEntity<StandardError> handlerHttpMessageNotReadableException(
+			final HttpMessageNotReadableException e, final HttpServletRequest req) {
 		final StandardError error = new StandardError();
 		error.setTimestamp(LocalDateTime.now());
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -70,8 +72,8 @@ public class ResourceHandlerException {
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	private ResponseEntity<StandardError> handlerMethodArgumentNotValidException(final MethodArgumentNotValidException m,
-																				 HttpServletRequest req) {
+	private ResponseEntity<StandardError> handlerMethodArgumentNotValidException(
+			final MethodArgumentNotValidException m, HttpServletRequest req) {
 		StandardError erro = new StandardError();
 		erro.setMessage(m.getBindingResult().getAllErrors().get(0).getDefaultMessage());
 		erro.setPath(req.getRequestURI());
@@ -80,10 +82,10 @@ public class ResourceHandlerException {
 
 		return ResponseEntity.badRequest().body(erro);
 	}
-	
+
 	@ExceptionHandler(StandardException.class)
 	private ResponseEntity<StandardError> handlerStandardException(final StandardException e,
-																		 final HttpServletRequest req) {
+			final HttpServletRequest req) {
 		final StandardError error = new StandardError();
 		error.setTimestamp(LocalDateTime.now());
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -91,5 +93,21 @@ public class ResourceHandlerException {
 		error.setPath(req.getRequestURI());
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
+	@ExceptionHandler(ForbiddenException.class)
+	private ResponseEntity<OAuthCustomError> handlerForbiddenException(final ForbiddenException e) {
+		final OAuthCustomError error = new OAuthCustomError("Forbidden",
+				e.getMessage());
+
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+	}
+	
+	@ExceptionHandler(UnauthorizedException.class)
+	private ResponseEntity<OAuthCustomError> handlerUnauthorizedException(final UnauthorizedException e) {
+		final OAuthCustomError error = new OAuthCustomError("Unauthorized",
+				e.getMessage());
+
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
 	}
 }

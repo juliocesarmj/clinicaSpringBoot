@@ -130,4 +130,8 @@ public class Usuario implements Serializable, UserDetails {
 	public String getPassword() {
 		return getSenha();
 	}
+	
+	public boolean temPerfil(String perfil) {
+		return perfis.stream().anyMatch(p -> p.getAuthority().equals(perfil));
+	}
 }

@@ -7,9 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TipoStatusConsulta {
 	
-	//TODO - Adicionar indice a partir de 1
-	AGENDADA("agendada"), REAGENDADA("reagendada"), CANCELADA("cancelada"), CONCLUIDA("concluída");
+	AGENDADA(1, "agendada"), REAGENDADA(2, "reagendada"), CANCELADA(3, "cancelada"), CONCLUIDA(4, "concluída"),
+	REAGENDAMENTO_SOLICITADO(5, "reagendamento solicitado");
 
+	private final int index;
 	private final String valor;
-
 }
