@@ -50,8 +50,8 @@ public class Consulta {
 		Consulta consulta = new Consulta();
 		consulta.setDataRegistroConsulta(LocalDate.now());
 		consulta.setDataAgendamento(dto.getDataAgendamento());
-		consulta.setStatusConsulta(dto.getStatusConsulta());
-		consulta.setStatusPagamento(dto.getStatusPagamento());
+		consulta.setStatusConsulta(TipoStatusConsulta.AGENDADA);
+		consulta.setStatusPagamento(TipoStatusPagamento.AGUARDANDO_PAGAMENTO);
 		consulta.setObservacoesMedico(dto.getObservacoesMedico());
 		consulta.setPaciente(paciente);
 		consulta.setMedico(medico);

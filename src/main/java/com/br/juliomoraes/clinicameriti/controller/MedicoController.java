@@ -47,13 +47,6 @@ public class MedicoController {
 		return ResponseEntity.status(HttpStatus.OK).body(this.service.medicos());
 	}
 
-	@ApiOperation("Serviço de exclusão de um cadastro de um médico")
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> excluirMedico(@PathVariable("id") final Long id) {
-		this.service.excluirMedico(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-	}
-
 	@ApiOperation("Serviço de consulta dos dados de um médico por ID")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MedicoResponseDto> consultarMedico(@PathVariable("id") final Long id) {

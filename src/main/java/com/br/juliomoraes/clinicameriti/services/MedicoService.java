@@ -60,13 +60,6 @@ public class MedicoService implements IMedicoService {
     }
     
     @Override
-    public void excluirMedico(final Long idMedico) {
-        this.pesquisarMedico(idMedico);
-        this.repository.deleteById(idMedico);
-
-    }
-    
-    @Override
     @Transactional(readOnly = true)
     public MedicoResponseDto consultarMedico(final Long idMedico) {
         return new MedicoResponseDto(this.pesquisarMedico(idMedico));

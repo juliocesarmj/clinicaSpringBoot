@@ -11,8 +11,6 @@ public interface IMedicoService {
 
 	void alterarMedico(Long idMedico, MedicoDTO dto);
 
-	void excluirMedico(Long idMedico);
-
 	MedicoResponseDto consultarMedico(Long idMedico);
 
 	List<MedicoResponseDto> medicos();

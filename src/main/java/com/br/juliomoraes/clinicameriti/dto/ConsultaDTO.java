@@ -1,29 +1,34 @@
 package com.br.juliomoraes.clinicameriti.dto;
 
-import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
-import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
+import java.time.LocalDate;
+
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Min;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConsultaDTO {
-
-    private Long id;
+	
+	@Min(value = 1, message = "É Necessário informar um paciente.")
     private Long pacienteId;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @JsonIgnore
     private LocalDate dataRegistroConsulta;
+    
+    @Min(value = 1, message = "É Necessário informar um medico.")
     private Long medicoId;
-    private TipoStatusConsulta statusConsulta;
-    private TipoStatusPagamento statusPagamento;
 
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @FutureOrPresent(message = "Informe uma data válida para o agendamento.")
     private LocalDate dataAgendamento;
     private String observacoesMedico;
 
