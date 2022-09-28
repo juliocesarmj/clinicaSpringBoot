@@ -17,4 +17,6 @@ public interface IConsultaRepository extends JpaRepository<Consulta, Long> {
     		+ "WHERE pac.cpf = :cpf "
     		+ "AND obj.dataAgendamento >= :dataAtual")
     List<Consulta> findByPacienteCpf(@Param("cpf") String cpf, @Param("dataAtual") LocalDate dataAtual);
+    
+    Page<Consulta> 
 }
