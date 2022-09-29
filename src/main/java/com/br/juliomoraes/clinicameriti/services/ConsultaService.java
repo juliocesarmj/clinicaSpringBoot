@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,7 @@ public class ConsultaService {
                 .orElseThrow(() -> new ObjectNotFoundException(MessageException.MEDICO_NAO_EXISTE.getMensagem()));
 
         Consulta consulta = Consulta.novo(dto, paciente, medico);
+        consulta.setUsuario(this.authService.authenticated());
 
         this.consultaRepository.save(consulta);
     }
@@ -73,12 +73,11 @@ public class ConsultaService {
     }
 
 	public Page<ConsultaPaginadaDTO> getConsultasPaginada(Pageable pageable) {
-		Long usuarioIdAdmin = 0L;
 		Usuario usuario = this.authService.authenticated();
 		if(this.authService.validaSeUsuarioLogadoEMedico(usuario)) {
 			Medico medico = this.medicoRepository.findByUsuarioId(usuario.getId());
-			
+			return this.consultaRepository.findAllByMedicoIdOrderByDataRegistroConsultaDesc(pageable, medico.getId()).map(ConsultaPaginadaDTO::new);
 		}
-		return null;
+		return this.consultaRepository.findAll(pageable).map(ConsultaPaginadaDTO::new);
 	}
 }

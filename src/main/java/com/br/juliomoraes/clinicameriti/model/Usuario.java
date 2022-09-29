@@ -1,8 +1,10 @@
 package com.br.juliomoraes.clinicameriti.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -42,7 +45,10 @@ public class Usuario implements Serializable, UserDetails {
 	private Set<Perfil> perfis = new HashSet<>();
 
 	private boolean ativo;
-
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Consulta> consultas = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -85,6 +91,10 @@ public class Usuario implements Serializable, UserDetails {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
 	}
 
 	public static Usuario novo(UsuarioPostDto dto) {

@@ -11,6 +11,8 @@ public class ConsultaPaginadaDTO extends ConsultaSimplesDTO {
 	
 	public ConsultaPaginadaDTO(Consulta consulta) {
 		super(consulta);
+		nomePaciente = consulta.getPaciente().getNome();
+		atendente = consulta.getUsuario().getNomeUsuario();
 	}
 
 	public String getNomePaciente() {

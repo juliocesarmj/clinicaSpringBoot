@@ -3,6 +3,8 @@ package com.br.juliomoraes.clinicameriti.repository;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +20,5 @@ public interface IConsultaRepository extends JpaRepository<Consulta, Long> {
     		+ "AND obj.dataAgendamento >= :dataAtual")
     List<Consulta> findByPacienteCpf(@Param("cpf") String cpf, @Param("dataAtual") LocalDate dataAtual);
     
-    Page<Consulta> 
+    Page<Consulta> findAllByMedicoIdOrderByDataRegistroConsultaDesc(Pageable pageable, Long medicoId);
 }
