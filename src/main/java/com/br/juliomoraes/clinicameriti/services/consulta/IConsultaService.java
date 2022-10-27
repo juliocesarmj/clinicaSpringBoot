@@ -1,5 +1,6 @@
 package com.br.juliomoraes.clinicameriti.services.consulta;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -21,4 +22,6 @@ public interface IConsultaService {
 	PacienteSimplesDTO consultasPorCpf(String cpf);
 
 	Page<ConsultaPaginadaDTO> getConsultasPaginada(Pageable pageable);
+	
+	void cancelarAgendaPorData(LocalDate data, String motivo);
 }

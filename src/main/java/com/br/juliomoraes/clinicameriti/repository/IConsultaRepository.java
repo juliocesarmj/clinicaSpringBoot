@@ -21,4 +21,6 @@ public interface IConsultaRepository extends JpaRepository<Consulta, Long> {
     List<Consulta> findByPacienteCpf(@Param("cpf") String cpf, @Param("dataAtual") LocalDate dataAtual);
     
     Page<Consulta> findAllByMedicoIdOrderByDataRegistroConsultaDesc(Pageable pageable, Long medicoId);
+    
+    List<Consulta> findAllByDataAgendamentoAndMedicoId(LocalDate dataAgendamento, Long medicoId);
 }

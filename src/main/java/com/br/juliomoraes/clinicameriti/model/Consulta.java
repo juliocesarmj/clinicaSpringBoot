@@ -18,6 +18,7 @@ import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusPagamento;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "consulta")
 @Getter
-@Setter
+@Setter(value = AccessLevel.PROTECTED)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Consulta {
@@ -74,5 +75,14 @@ public class Consulta {
 		consulta.setPaciente(paciente);
 		consulta.setMedico(medico);
 		return consulta;
+	}
+	
+	public void solicitarReagendamento(String motivoSolicitacaoReagendamento) {
+		this.setStatusConsulta(TipoStatusConsulta.REAGENDAMENTO_SOLICITADO);
+		this.setObservacoesMedico(motivoSolicitacaoReagendamento == null ? "motivos pessoais." : motivoSolicitacaoReagendamento);
+	}
+	
+	public void adicionarUsuario(Usuario usuario) {
+		this.setUsuario(usuario);
 	}
 }
