@@ -13,6 +13,7 @@ import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaPaginadaDTO;
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaSimplesDTO;
 import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteSimplesDTO;
+import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.enums.excecoes.mensagens.MessageException;
 import com.br.juliomoraes.clinicameriti.model.Consulta;
 import com.br.juliomoraes.clinicameriti.model.Medico;
@@ -82,7 +83,7 @@ public class ConsultaService implements IConsultaService {
 		Usuario usuario = this.authService.authenticated();
 		if (this.authService.validaSeUsuarioLogadoEMedico(usuario)) {
 			Medico medico = this.medicoRepository.findByUsuarioId(usuario.getId());
-			return this.consultaRepository.findAllByMedicoIdOrderByDataRegistroConsultaDesc(pageable, medico.getId())
+			return this.consultaRepository.findAllByMedicoIdAndStatusConsultaOrderByDataAgendamentoDesc(pageable, medico.getId(), TipoStatusConsulta.AGENDADA)
 					.map(ConsultaPaginadaDTO::new);
 		}
 		return this.consultaRepository.findAll(pageable).map(ConsultaPaginadaDTO::new);

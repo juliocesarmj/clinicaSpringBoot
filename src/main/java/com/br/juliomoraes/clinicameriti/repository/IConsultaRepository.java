@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.br.juliomoraes.clinicameriti.enums.consulta.TipoStatusConsulta;
 import com.br.juliomoraes.clinicameriti.model.Consulta;
 
 public interface IConsultaRepository extends JpaRepository<Consulta, Long> {
@@ -20,7 +21,7 @@ public interface IConsultaRepository extends JpaRepository<Consulta, Long> {
     		+ "AND obj.dataAgendamento >= :dataAtual")
     List<Consulta> findByPacienteCpf(@Param("cpf") String cpf, @Param("dataAtual") LocalDate dataAtual);
     
-    Page<Consulta> findAllByMedicoIdOrderByDataRegistroConsultaDesc(Pageable pageable, Long medicoId);
+    Page<Consulta> findAllByMedicoIdAndStatusConsultaOrderByDataAgendamentoDesc(Pageable pageable, Long medicoId, TipoStatusConsulta statusConsulta);
     
     List<Consulta> findAllByDataAgendamentoAndMedicoId(LocalDate dataAgendamento, Long medicoId);
 }
