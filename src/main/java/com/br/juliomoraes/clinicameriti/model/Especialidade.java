@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "especialidade")
 public class Especialidade {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
