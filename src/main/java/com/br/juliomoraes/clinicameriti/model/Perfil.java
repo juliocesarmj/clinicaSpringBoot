@@ -9,39 +9,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "perfil")
 public class Perfil implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_perfil")
+	@SequenceGenerator(name = "seq_perfil", sequenceName = "perfil_sequence")
 	private Long id;
 	private String authority;
 	
 	@ManyToMany(mappedBy = "perfis")
 	private Set<Usuario> usuarios = new HashSet<>();
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
 }

@@ -1,7 +1,6 @@
 package com.br.juliomoraes.clinicameriti.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,23 +9,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.br.juliomoraes.clinicameriti.dto.paciente.EnderecoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "endereco")
 @AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_endereco")
+	@SequenceGenerator(name = "seq_endereco", sequenceName = "endereco_sequence")
 	private Long id;
 
 	@Column(nullable = false, length = 100)
@@ -52,74 +57,8 @@ public class Endereco implements Serializable {
 
 	@OneToMany(mappedBy = "endereco")
 	@JsonIgnore
-	private List<Paciente> pacientes = new ArrayList<>();
+	private List<Paciente> pacientes;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRuaOuAvenida() {
-		return ruaOuAvenida;
-	}
-
-	public void setRuaOuAvenida(String ruaOuAvenida) {
-		this.ruaOuAvenida = ruaOuAvenida;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-	public List<Paciente> getPacientes() {
-		return pacientes;
-	}
 	public static Endereco novo(EnderecoDTO dto) {
 		Endereco endereco = new Endereco();
 		endereco.setBairro(dto.getBairro());

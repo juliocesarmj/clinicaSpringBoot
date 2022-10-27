@@ -12,20 +12,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteDTO;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "paciente")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Paciente {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_paciente")
+	@SequenceGenerator(name = "seq_paciente", sequenceName = "paciente_sequence")
 	private Long id;
 
 	@Column(nullable = false, length = 225)
@@ -42,72 +49,13 @@ public class Paciente {
 
 	@Column(nullable = false, unique = true, length = 11)
 	private String cpf;
+	
 	@ManyToOne
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "paciente")
 	private List<Consulta> consultas = new ArrayList<>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public List<Consulta> getConsultas() {
-		return consultas;
-	}
 
 	public static Paciente novo(PacienteDTO dto) {
 		Paciente paciente = new Paciente();

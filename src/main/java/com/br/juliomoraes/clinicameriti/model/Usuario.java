@@ -1,7 +1,6 @@
 package com.br.juliomoraes.clinicameriti.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -26,13 +26,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "usuario")
 public class Usuario implements Serializable, UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
+	@SequenceGenerator(name = "seq_usuario", sequenceName = "usuario_sequence")
 	private Long id;
 	private String nomeUsuario;
 
@@ -47,56 +53,8 @@ public class Usuario implements Serializable, UserDetails {
 	private boolean ativo;
 	
 	@OneToMany(mappedBy = "usuario")
-	private List<Consulta> consultas = new ArrayList<>();
+	private List<Consulta> consultas;
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public Set<Perfil> getPerfis() {
-		return perfis;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public List<Consulta> getConsultas() {
-		return consultas;
-	}
-
 	public static Usuario novo(UsuarioPostDto dto) {
 		Usuario usuario = new Usuario();
 		usuario.setNomeUsuario(dto.getNomeUsuario());
