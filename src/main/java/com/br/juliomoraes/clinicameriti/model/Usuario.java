@@ -38,7 +38,7 @@ public class Usuario implements Serializable, UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
-	@SequenceGenerator(name = "seq_usuario", sequenceName = "usuario_sequence")
+	@SequenceGenerator(name = "seq_usuario", sequenceName = "usuario_sequence", initialValue = 8)
 	private Long id;
 	private String nomeUsuario;
 

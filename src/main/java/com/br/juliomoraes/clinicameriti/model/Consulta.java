@@ -61,6 +61,8 @@ public class Consulta {
 	@Column(columnDefinition = "TEXT")
 	private String observacoesMedico;
 	
+	private LocalDate dataReagendamentoSolicitado;
+	
 	@ManyToOne
 	@JoinColumn(name = "usuarioId", nullable = false)
 	private Usuario usuario;
@@ -80,6 +82,7 @@ public class Consulta {
 	public void solicitarReagendamento(String motivoSolicitacaoReagendamento) {
 		this.setStatusConsulta(TipoStatusConsulta.REAGENDAMENTO_SOLICITADO);
 		this.setObservacoesMedico(motivoSolicitacaoReagendamento == null ? "motivos pessoais." : motivoSolicitacaoReagendamento);
+		this.setDataReagendamentoSolicitado(LocalDate.now());
 	}
 	
 	public void adicionarUsuario(Usuario usuario) {
