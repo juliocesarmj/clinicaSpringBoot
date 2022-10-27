@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.medico;
 
 import com.br.juliomoraes.clinicameriti.dto.medico.MedicoDTO;
 import com.br.juliomoraes.clinicameriti.dto.medico.MedicoResponseDto;
@@ -9,9 +9,12 @@ import com.br.juliomoraes.clinicameriti.model.Medico;
 import com.br.juliomoraes.clinicameriti.model.medico.MedicoMapper;
 import com.br.juliomoraes.clinicameriti.repository.IEspecialidadeRepository;
 import com.br.juliomoraes.clinicameriti.repository.IMedicoRepository;
+import com.br.juliomoraes.clinicameriti.services.auth.IAuthService;
 import com.br.juliomoraes.clinicameriti.services.exceptions.EspecialidadeException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.MedicoExistsException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.ObjectNotFoundException;
+import com.br.juliomoraes.clinicameriti.services.user.IUserService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

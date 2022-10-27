@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.consulta;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,6 +21,7 @@ import com.br.juliomoraes.clinicameriti.model.Usuario;
 import com.br.juliomoraes.clinicameriti.repository.IConsultaRepository;
 import com.br.juliomoraes.clinicameriti.repository.IMedicoRepository;
 import com.br.juliomoraes.clinicameriti.repository.IPacienteRepository;
+import com.br.juliomoraes.clinicameriti.services.auth.IAuthService;
 import com.br.juliomoraes.clinicameriti.services.exceptions.ObjectNotFoundException;
 import com.br.juliomoraes.clinicameriti.services.exceptions.StandardException;
 
@@ -28,13 +29,14 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ConsultaService {
+public class ConsultaService implements IConsultaService {
     
     final IConsultaRepository consultaRepository;
     final IMedicoRepository medicoRepository;
     final IPacienteRepository pacienteRepository;
     final IAuthService authService;
     
+    @Override
     public void novaConsulta(ConsultaDTO dto) {
         Paciente paciente = this.pacienteRepository
                 .findById(dto.getPacienteId())
@@ -48,17 +50,20 @@ public class ConsultaService {
 
         this.consultaRepository.save(consulta);
     }
-
+    
+    @Override
     public ConsultaCompletaDTO consultaPorId(Long id) {
         return ConsultaCompletaDTO.copyEntityFromDto(this.consultaRepository.findById(id)
                 .orElseThrow(() -> new StandardException(MessageException.OBJECTO_NAO_ENCONTRADO.getMensagem())));
     }
     
+    @Override
     public List<ConsultaCompletaDTO> consultaPorNome(String nome) {
         return this.consultaRepository.findByPacienteNomeContainingIgnoreCase(nome).stream().map(ConsultaCompletaDTO::copyEntityFromDto)
                 .collect(Collectors.toList());
     }
     
+    @Override
     public PacienteSimplesDTO consultasPorCpf(String cpf) {
     	List<Consulta> listConsultasPorCpf = this.consultaRepository.findByPacienteCpf(cpf, LocalDate.now());
     	
@@ -71,7 +76,8 @@ public class ConsultaService {
     private List<ConsultaSimplesDTO> getConsultas(List<Consulta> consultas) {
     	return consultas.stream().map(ConsultaSimplesDTO::new).collect(Collectors.toList());
     }
-
+    
+    @Override
 	public Page<ConsultaPaginadaDTO> getConsultasPaginada(Pageable pageable) {
 		Usuario usuario = this.authService.authenticated();
 		if(this.authService.validaSeUsuarioLogadoEMedico(usuario)) {

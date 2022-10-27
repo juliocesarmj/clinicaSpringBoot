@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.medico;
 
 import java.util.List;
 

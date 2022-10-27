@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.user;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

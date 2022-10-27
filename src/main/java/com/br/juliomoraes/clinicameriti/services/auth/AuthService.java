@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

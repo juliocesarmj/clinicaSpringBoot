@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioGetDTO;
 import com.br.juliomoraes.clinicameriti.dto.usuario.UsuarioPostDto;
-import com.br.juliomoraes.clinicameriti.services.IUserService;
+import com.br.juliomoraes.clinicameriti.services.user.IUserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.auth;
 
 import com.br.juliomoraes.clinicameriti.model.Usuario;
 

@@ -20,7 +20,7 @@ import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaCompletaDTO;
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaDTO;
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaPaginadaDTO;
 import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteSimplesDTO;
-import com.br.juliomoraes.clinicameriti.services.ConsultaService;
+import com.br.juliomoraes.clinicameriti.services.consulta.ConsultaService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

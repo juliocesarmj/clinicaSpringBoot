@@ -1,4 +1,4 @@
-package com.br.juliomoraes.clinicameriti.services;
+package com.br.juliomoraes.clinicameriti.services.paciente;
 
 import com.br.juliomoraes.clinicameriti.dto.paciente.EnderecoDTO;
 import com.br.juliomoraes.clinicameriti.dto.paciente.PacienteDTO;

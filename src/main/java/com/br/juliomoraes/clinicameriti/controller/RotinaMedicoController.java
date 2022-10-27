@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.juliomoraes.clinicameriti.dto.consulta.ConsultaPaginadaDTO;
-import com.br.juliomoraes.clinicameriti.services.ConsultaService;
+import com.br.juliomoraes.clinicameriti.services.consulta.IConsultaService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @Api(tags = "Medico")
 public class RotinaMedicoController {
 	
-	final ConsultaService service;
+	final IConsultaService service;
 	
 	@ApiOperation("Serviço de listagem de todas as consultas agendadas. Ordenação decrescente por data de agendamento")
     @GetMapping
